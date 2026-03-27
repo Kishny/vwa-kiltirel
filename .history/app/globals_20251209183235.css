@@ -1,0 +1,121 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Petit reset global */
+
+html,
+body {
+  padding: 0;
+  margin: 0;
+}
+
+/* Thème global */
+body {
+  @apply bg-vwa-background text-vwa-dark antialiased;
+}
+
+/* Cacher les scrollbars horizontales des carrousels */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+.no-scrollbar {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+
+/* ===========================
+   UTILITAIRES ANIMATIONS PREMIUM
+   =========================== */
+@layer utilities {
+  /* Boutons & éléments "pressables" */
+  .pressable {
+    @apply transition-all duration-300 active:scale-[0.97];
+  }
+
+  /* CTA principaux (terracotta) */
+  .cta-primary {
+    @apply inline-flex items-center justify-center rounded-full px-5 py-2 text-sm font-semibold
+    text-white bg-vwa-terracotta shadow-sm pressable
+    md:hover:-translate-y-[3px] md:hover:scale-[1.02]
+    md:hover:shadow-[0_12px_28px_-10px_rgba(196,75,52,0.9)];
+  }
+
+  /* CTA accent (orange / ocre) */
+  .cta-accent {
+    @apply inline-flex items-center justify-center rounded-full px-5 py-2 text-sm font-semibold
+    text-white bg-vwa-accent shadow-sm pressable
+    md:hover:-translate-y-[3px] md:hover:scale-[1.02]
+    md:hover:shadow-[0_12px_28px_-10px_rgba(199,140,59,0.9)];
+  }
+
+  /* CTA secondaire clair */
+  .cta-secondary {
+    @apply inline-flex items-center justify-center rounded-full px-5 py-2 text-sm font-medium
+    bg-white text-vwa-dark border border-vwa-dark/10 shadow-sm pressable
+    md:hover:-translate-y-[3px] md:hover:scale-[1.02]
+    md:hover:shadow-[0_10px_24px_-10px_rgba(0,0,0,0.18)];
+  }
+
+  /* Tags / badges */
+  .tag-pill {
+    @apply inline-flex w-fit rounded-full px-3 py-1 text-[11px] font-medium
+    bg-vwa-primarySoft text-vwa-primary pressable;
+  }
+
+  /* Hover desktop pour les tags */
+  @media (min-width: 768px) {
+    .tag-pill:hover {
+      @apply -translate-y-[1px] bg-vwa-primarySoftHover;
+    }
+  }
+
+  /* CARTES – base douce */
+  .card-soft {
+    @apply rounded-3xl bg-white border border-black/5 shadow-sm
+    transition-all duration-300 active:scale-[0.98];
+  }
+
+  /* Cartes thématiques avec shadow colorée */
+  .card-culture {
+    @apply card-soft
+    md:hover:-translate-y-[4px]
+    md:hover:shadow-[0_16px_36px_-16px_rgba(196,75,52,0.8)];
+  }
+
+  .card-familles {
+    @apply card-soft
+    md:hover:-translate-y-[4px]
+    md:hover:shadow-[0_16px_36px_-16px_rgba(75,122,61,0.75)];
+  }
+
+  .card-bienetre {
+    @apply card-soft
+    md:hover:-translate-y-[4px]
+    md:hover:shadow-[0_16px_36px_-16px_rgba(47,113,136,0.75)];
+  }
+
+  /* Cartes neutres (ex : moments forts génériques) */
+  .card-neutral {
+    @apply card-soft
+    md:hover:-translate-y-[4px]
+    md:hover:shadow-[0_16px_36px_-16px_rgba(0,0,0,0.16)];
+  }
+}
+
+@keyframes slowFloat {
+  0% {
+    transform: rotate(-12deg) translateY(0px);
+  }
+  50% {
+    transform: rotate(-12deg) translateY(12px);
+  }
+  100% {
+    transform: rotate(-12deg) translateY(0px);
+  }
+}
+
+.animate-slowFloat {
+  animation: slowFloat 120s ease-in-out infinite;
+}
