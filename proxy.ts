@@ -1,39 +1,41 @@
 import { NextRequest, NextResponse } from "next/server";
 import { verifyAdminSession } from "@/lib/admin-session";
 
-function isAdminAuthenticated(request: NextRequest) {
+const NO_STORE = "no-store, no-cache, must-revalidate, private";
+
+function next(noCache = false) {
+  const res = NextResponse.next();
+  if (noCache) res.headers.set("Cache-Control", NO_STORE);
+  return res;
+}
+
+async function isAdminAuthenticated(request: NextRequest) {
   const cookieName = process.env.ADMIN_COOKIE_NAME || "vwa_admin_session";
   const session = request.cookies.get(cookieName)?.value;
 
   return verifyAdminSession(session);
 }
 
-export function proxy(request: NextRequest) {
+export async function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl;
-  const isAuthenticated = isAdminAuthenticated(request);
+  const isAuthenticated = await isAdminAuthenticated(request);
 
-  // ==============================
-  // PAGES ADMIN
-  // ==============================
   if (pathname.startsWith("/admin/login")) {
     if (isAuthenticated) {
       return NextResponse.redirect(new URL("/admin", request.url));
     }
-    return NextResponse.next();
+    return next();
   }
 
   if (pathname.startsWith("/admin")) {
     if (!isAuthenticated) {
       return NextResponse.redirect(new URL("/admin/login", request.url));
     }
-    return NextResponse.next();
+    return next(true);
   }
 
-  // ==============================
-  // API ADMIN
-  // ==============================
   if (pathname.startsWith("/api/admin/login")) {
-    return NextResponse.next();
+    return next();
   }
 
   if (pathname.startsWith("/api/admin/logout")) {
@@ -43,7 +45,7 @@ export function proxy(request: NextRequest) {
         { status: 401 }
       );
     }
-    return NextResponse.next();
+    return next(true);
   }
 
   if (pathname.startsWith("/api/admin")) {
@@ -53,13 +55,9 @@ export function proxy(request: NextRequest) {
         { status: 401 }
       );
     }
-    return NextResponse.next();
+    return next(true);
   }
 
-  // ==============================
-  // OPTION BONUS :
-  // protéger aussi certaines routes inscriptions sensibles
-  // ==============================
   const protectedEventInscriptionApi =
     pathname.startsWith("/api/event-inscriptions/") &&
     !pathname.endsWith("/api/event-inscriptions");
@@ -71,7 +69,7 @@ export function proxy(request: NextRequest) {
     );
   }
 
-  return NextResponse.next();
+  return next();
 }
 
 export const config = {
