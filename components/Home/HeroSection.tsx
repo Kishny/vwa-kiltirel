@@ -1,100 +1,89 @@
 "use client";
 
 import Link from "next/link";
-import { ArrowRightIcon, UserPlusIcon } from "@heroicons/react/24/outline";
+import { motion } from "framer-motion";
+import { ArrowRight, UserPlus, Sparkles, Heart } from "lucide-react";
 
 export default function HeroSection() {
-    return (
-        <section className="text-center pt-6 pb-8">
-            <p className="text-[11px] uppercase tracking-[0.2em] text-vwa-dark/60">
-                Association culturelle & événementielle
-            </p>
+  return (
+    <motion.section
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.6 }}
+      className="text-center pt-8 pb-12"
+    >
+      <div className="inline-flex items-center gap-2 mb-4">
+        <div className="h-px w-6 bg-gradient-to-r from-transparent to-vwa-accent/60" />
+        <span className="text-[10px] font-medium tracking-[0.25em] text-vwa-accent/70 uppercase">
+          Association culturelle & événementielle
+        </span>
+        <div className="h-px w-6 bg-gradient-to-l from-transparent to-vwa-accent/60" />
+      </div>
 
-            <h1 className="mt-3 text-2xl sm:text-3xl font-extrabold text-vwa-dark">
-                🧡 Vwa Kiltirèl
-            </h1>
+      <motion.h1
+        initial={{ opacity: 0, scale: 0.95 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ delay: 0.2, duration: 0.5 }}
+        className="text-3xl sm:text-4xl lg:text-5xl font-bold text-vwa-dark"
+      >
+        🧡 Vwa Kiltirèl
+      </motion.h1>
 
-            <p className="mt-3 text-sm sm:text-base text-vwa-dark/75 max-w-xl mx-auto">
-                Des événements, ateliers et moments de partage pour faire vibrer les
-                cultures, les familles et le vivre ensemble à Tours.
-            </p>
+      <motion.p
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 0.3, duration: 0.5 }}
+        className="mt-4 text-sm sm:text-base text-vwa-dark/70 max-w-xl mx-auto leading-relaxed"
+      >
+        Des événements, ateliers et moments de partage pour faire vibrer les
+        cultures, les familles et le vivre ensemble à Tours.
+      </motion.p>
 
-            {/* CTA zone */}
-            <div className="mt-6 flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4">
-                {/* Bouton 1 : Voir les actualités */}
-                <Link
-                    href="/actualites"
-                    className="
-            group relative inline-flex items-center justify-center
-            rounded-full px-8 py-3 text-sm font-medium text-white
-            bg-gradient-to-r from-vwa-terracotta to-vwa-accent
-            shadow-md hover:shadow-[0_16px_32px_rgba(139,63,33,0.35)]
-            transition-all duration-200
-            ring-1 ring-vwa-terracotta/40 hover:ring-vwa-terracotta/70
-            focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-vwa-accent/70
-            active:scale-95
-          "
-                >
-                    {/* halo doux derrière le bouton */}
-                    <span
-                        className="
-              pointer-events-none absolute inset-0 rounded-full
-              opacity-0 group-hover:opacity-100
-              bg-vwa-terracotta/20 blur-xl transition-opacity duration-200
-            "
-                    />
+      <motion.div
+        initial={{ opacity: 0, y: 10 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.4, duration: 0.5 }}
+        className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-4"
+      >
+        {/* Bouton principal - Voir les actualités */}
+        <Link
+          href="/actualites"
+          className="group relative inline-flex items-center justify-center rounded-full px-8 py-3 text-sm font-semibold text-white bg-gradient-to-r from-vwa-terracotta to-vwa-accent shadow-md transition-all duration-300 hover:shadow-xl hover:-translate-y-0.5 active:scale-95"
+        >
+          <span className="absolute inset-0 rounded-full bg-vwa-terracotta/20 blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+          <span className="relative z-10 flex items-center gap-2">
+            <Sparkles className="h-4 w-4" />
+            Voir les actualités
+            <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
+          </span>
+        </Link>
 
-                    <span className="relative z-10 flex items-center gap-2">
-                        <span>Voir les actualités</span>
-                        <ArrowRightIcon
-                            className="
-                h-4 w-4
-                transition-transform duration-200
-                group-hover:translate-x-1 group-active:translate-x-0.5
-              "
-                        />
-                    </span>
-                </Link>
+        {/* Bouton secondaire - Devenir membre */}
+        <Link
+          href="/devenir-membre"
+          className="group relative inline-flex items-center justify-center rounded-full px-8 py-3 text-sm font-medium bg-white text-vwa-dark border border-vwa-dark/10 shadow-sm transition-all duration-300 hover:shadow-md hover:border-vwa-primary/30 hover:text-vwa-primary active:scale-95"
+        >
+          <span className="absolute inset-0 rounded-full bg-vwa-primary/5 blur-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+          <span className="relative z-10 flex items-center gap-2">
+            <UserPlus className="h-4 w-4 transition-transform group-hover:-translate-y-0.5" />
+            Devenir membre
+          </span>
+        </Link>
+      </motion.div>
 
-                {/* Bouton 2 : Devenir membre */}
-                <Link
-                    href="/devenir-membre"
-                    className="
-            group relative inline-flex items-center justify-center
-            rounded-full px-8 py-3 text-sm font-medium
-            bg-white text-vwa-dark
-            border border-vwa-dark/10
-            shadow-sm hover:shadow-md
-            transition-all duration-200
-            hover:bg-vwa-background/70
-            ring-1 ring-transparent hover:ring-vwa-primary/25
-            focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-vwa-primary/60
-            active:scale-95
-          "
-                >
-                    {/* halo plus léger */}
-                    <span
-                        className="
-              pointer-events-none absolute inset-0 rounded-full
-              opacity-0 group-hover:opacity-100
-              bg-vwa-primary/10 blur-lg transition-opacity duration-200
-            "
-                    />
-
-                    <span className="relative z-10 flex items-center gap-2">
-                        <UserPlusIcon
-                            className="
-                h-4 w-4
-                transition-transform duration-200
-                group-hover:-translate-y-0.5 group-active:-translate-y-0
-              "
-                        />
-                        <span>Devenir membre</span>
-                    </span>
-                </Link>
-            </div>
-        </section>
-    );
+      {/* Petit élément décoratif */}
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 0.5 }}
+        className="mt-8 flex items-center justify-center gap-2 text-[10px] text-vwa-dark/40"
+      >
+        <Heart className="h-3 w-3" />
+        <span>Une communauté qui grandit ensemble</span>
+        <Heart className="h-3 w-3" />
+      </motion.div>
+    </motion.section>
+  );
 }
 
 

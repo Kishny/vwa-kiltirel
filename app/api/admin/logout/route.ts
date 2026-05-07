@@ -4,7 +4,10 @@ export async function POST() {
   const cookieName = process.env.ADMIN_COOKIE_NAME || "vwa_admin_session";
 
   const response = NextResponse.json(
-    { success: true, message: "Déconnexion réussie." },
+    {
+      success: true,
+      message: "Déconnexion réussie.",
+    },
     { status: 200 }
   );
 

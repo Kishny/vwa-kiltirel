@@ -1,35 +1,111 @@
+import type { Metadata } from "next";
 import HeroSection from "@/components/Home/HeroSection";
 import NextEventsCarousel from "@/components/Home/NextEventsCarousel";
 import MomentsFortsCarousel from "@/components/Home/MomentsFortsCarousel";
 import ValeursSection from "@/components/Home/ValeursSection";
 import NewsletterForm from "@/components/Home/NewsletterForm";
 
+export const metadata: Metadata = {
+  title: "Association culturelle à Tours – Événements afro-caribéens",
+  description:
+    "Vwa Kiltirèl est une association culturelle à Tours qui propose des événements, ateliers et expériences autour des cultures afro-caribéennes, créoles et afro-descendantes.",
+
+  keywords: [
+    "association culturelle Tours",
+    "événements culturels Tours",
+    "culture afro caribéenne",
+    "culture créole Tours",
+    "ateliers culturels Tours",
+    "association afro descendante France",
+    "soirées culturelles Tours",
+    "Vwa Kiltirèl",
+    "association culturelle afro-caribéenne",
+    "ateliers créatifs Tours",
+  ],
+
+  alternates: {
+    canonical: "https://vwa-kiltirel.vercel.app",
+  },
+
+  openGraph: {
+    title: "Vwa Kiltirèl – Association culturelle à Tours",
+    description:
+      "Découvrez Vwa Kiltirèl : événements, ateliers, transmission, partage et expériences culturelles afro-caribéennes à Tours.",
+    url: "https://vwa-kiltirel.vercel.app",
+    siteName: "Vwa Kiltirèl",
+    images: [
+      {
+        url: "/images/og-cover.png",
+        width: 1200,
+        height: 630,
+        alt: "Vwa Kiltirèl – Association culturelle à Tours",
+      },
+    ],
+    locale: "fr_FR",
+    type: "website",
+  },
+
+  twitter: {
+    card: "summary_large_image",
+    title: "Vwa Kiltirèl – Association culturelle à Tours",
+    description:
+      "Événements, ateliers et expériences culturelles afro-caribéennes à Tours.",
+    images: ["/images/og-cover.png"],
+  },
+};
+
 export default function Home() {
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    name: "Vwa Kiltirèl",
+    url: "https://vwa-kiltirel.vercel.app",
+    logo: "https://vwa-kiltirel.vercel.app/favicon.png",
+    description:
+      "Association culturelle à Tours dédiée aux cultures afro-caribéennes, créoles et afro-descendantes à travers des événements, ateliers et actions culturelles.",
+    address: {
+      "@type": "PostalAddress",
+      streetAddress: "55 Rue Daniel Mayer",
+      addressLocality: "Tours",
+      postalCode: "37100",
+      addressCountry: "FR",
+    },
+    areaServed: "Tours",
+    email: "vwakiltirel.asso@gmail.com",
+  };
+
   return (
-    <div className="flex flex-col gap-10 py-6">
-      <HeroSection />
-      <NextEventsCarousel />
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(jsonLd),
+        }}
+      />
 
-      {/* Section valeurs premium */}
-      <ValeursSection />
+      <div className="flex flex-col gap-10 py-6">
+        <HeroSection />
+        <NextEventsCarousel />
 
-      {/* Moments forts */}
-      <MomentsFortsCarousel />
+        <ValeursSection />
 
-      {/* Newsletter (version simple) */}
-      <section className="mb-8 mt-2">
-        <h2 className="text-lg font-semibold text-vwa-dark mb-2">
-          Restez informé·e
-        </h2>
+        <MomentsFortsCarousel />
 
-        <p className="text-xs text-vwa-dark/70 mb-3 max-w-md">
-          Recevez nos prochains événements, ateliers et appels à participation
-          directement dans votre boîte mail.
-        </p>
+        <section className="mb-8 mt-2 text-center">
+          <h2 className="mb-2 text-lg font-semibold text-vwa-dark">
+            Restez informé·e
+          </h2>
 
-        <NewsletterForm />
-      </section>
-    </div>
+          <p className="mb-3 max-w-md mx-auto text-xs text-vwa-dark/70">
+            Recevez nos prochains événements, ateliers et appels à participation
+            directement dans votre boîte mail.
+          </p>
+
+          <div className="flex justify-center">
+            <NewsletterForm />
+          </div>
+        </section>
+      </div>
+    </>
   );
 }
-

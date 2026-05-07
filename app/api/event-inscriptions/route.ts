@@ -1,8 +1,19 @@
 // app/api/event-inscriptions/route.ts
+import { cookies } from "next/headers";
 import { NextResponse } from "next/server";
 import { connectToDatabase } from "@/lib/mongodb";
 import EventInscription from "@/models/EventInscription";
 import { sendBrevoMail } from "@/lib/mail";
+import { verifyAdminSession } from "@/lib/admin-session";
+
+function escapeHtml(str: string): string {
+  return str
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#039;");
+}
 
 type EventInscriptionBody = {
   eventSlug?: string;
@@ -17,18 +28,38 @@ type EventInscriptionBody = {
   isPaid?: boolean;
 };
 
-export async function GET() {
+export async function GET(request: Request) {
+  const cookieStore = await cookies();
+  const cookieName = process.env.ADMIN_COOKIE_NAME || "vwa_admin_session";
+  const session = await verifyAdminSession(cookieStore.get(cookieName)?.value);
+
+  if (!session) {
+    return NextResponse.json(
+      { success: false, error: "Non autorisé." },
+      { status: 401 }
+    );
+  }
+
+  const { searchParams } = new URL(request.url);
+  const page = Math.max(1, parseInt(searchParams.get("page") ?? "1", 10));
+  const limit = Math.min(100, Math.max(1, parseInt(searchParams.get("limit") ?? "50", 10)));
+  const skip = (page - 1) * limit;
+
   try {
     await connectToDatabase();
 
-    const inscriptions = await EventInscription.find()
-      .sort({ createdAt: -1 })
-      .lean();
+    const [inscriptions, total] = await Promise.all([
+      EventInscription.find().sort({ createdAt: -1 }).skip(skip).limit(limit).lean(),
+      EventInscription.countDocuments(),
+    ]);
 
     return NextResponse.json(
       {
         success: true,
-        count: inscriptions.length,
+        total,
+        page,
+        limit,
+        totalPages: Math.ceil(total / limit),
         inscriptions,
       },
       { status: 200 }
@@ -141,16 +172,16 @@ export async function POST(request: Request) {
         htmlContent: `
           <div style="font-family:Arial,sans-serif;line-height:1.6;color:#1f2937;max-width:640px;margin:0 auto;">
             <h2>Nouvelle inscription reçue</h2>
-            <p><strong>Événement :</strong> ${data.eventTitle}</p>
-            <p><strong>Slug :</strong> ${data.eventSlug}</p>
+            <p><strong>Événement :</strong> ${escapeHtml(data.eventTitle)}</p>
+            <p><strong>Slug :</strong> ${escapeHtml(data.eventSlug)}</p>
             <hr style="margin:20px 0;border:none;border-top:1px solid #e5e7eb;" />
-            <p><strong>Prénom :</strong> ${data.firstName}</p>
-            <p><strong>Nom :</strong> ${data.lastName}</p>
-            <p><strong>Email :</strong> ${data.email}</p>
-            <p><strong>Téléphone :</strong> ${data.phone || "Non renseigné"}</p>
+            <p><strong>Prénom :</strong> ${escapeHtml(data.firstName)}</p>
+            <p><strong>Nom :</strong> ${escapeHtml(data.lastName)}</p>
+            <p><strong>Email :</strong> ${escapeHtml(data.email)}</p>
+            <p><strong>Téléphone :</strong> ${escapeHtml(data.phone || "Non renseigné")}</p>
             <p><strong>Adultes :</strong> ${data.adults}</p>
             <p><strong>Enfants :</strong> ${data.children}</p>
-            <p><strong>Message :</strong> ${data.message || "Aucun message"}</p>
+            <p><strong>Message :</strong> ${escapeHtml(data.message || "Aucun message")}</p>
             <p><strong>Événement payant :</strong> ${data.isPaid ? "Oui" : "Non"}</p>
           </div>
         `,
@@ -161,12 +192,12 @@ export async function POST(request: Request) {
         subject: `Confirmation d'inscription – ${data.eventTitle}`,
         htmlContent: `
           <div style="font-family:Arial,sans-serif;line-height:1.6;color:#1f2937;max-width:640px;margin:0 auto;">
-            <h2>Bonjour ${data.firstName},</h2>
-            <p>Votre inscription à l'événement <strong>${data.eventTitle}</strong> a bien été enregistrée.</p>
+            <h2>Bonjour ${escapeHtml(data.firstName)},</h2>
+            <p>Votre inscription à l'événement <strong>${escapeHtml(data.eventTitle)}</strong> a bien été enregistrée.</p>
             <p>Nous vous recontacterons avec les informations pratiques si nécessaire.</p>
             <hr style="margin:20px 0;border:none;border-top:1px solid #e5e7eb;" />
             <p><strong>Participants :</strong> ${data.adults} adulte(s) et ${data.children} enfant(s)</p>
-            <p><strong>Message transmis :</strong> ${data.message || "Aucun message"}</p>
+            <p><strong>Message transmis :</strong> ${escapeHtml(data.message || "Aucun message")}</p>
             <p>Merci pour votre confiance,</p>
             <p><strong>Vwa Kiltirèl</strong></p>
           </div>

@@ -2,30 +2,107 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import Header from "@/components/layout/Header";
-import MobileBottomNav from "@/components/layout/MobileBottomNav";
 import Footer from "@/components/layout/Footer";
 
 export const metadata: Metadata = {
-  title: "Vwa Kiltirèl",
+  metadataBase: new URL("https://vwa-kiltirel.vercel.app"),
+  title: {
+    default: "Vwa Kiltirèl – Association culturelle à Tours",
+    template: "%s | Vwa Kiltirèl",
+  },
   description:
-    "Association Vwa Kiltirèl – événements, ateliers et actions culturelles à Tours.",
+    "Vwa Kiltirèl est une association culturelle à Tours qui propose des événements, ateliers et expériences autour des cultures afro-caribéennes, créoles et afro-descendantes.",
+  keywords: [
+    "association culturelle Tours",
+    "événements Tours",
+    "culture afro caribéenne",
+    "culture créole",
+    "événements culturels Tours",
+    "association culturelle France",
+    "ateliers culturels",
+    "Vwa Kiltirèl",
+  ],
+  authors: [{ name: "Vwa Kiltirèl" }],
+  creator: "Vwa Kiltirèl",
+  publisher: "Vwa Kiltirèl",
   icons: {
     icon: "/favicon.png",
   },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
+  },
+  openGraph: {
+    type: "website",
+    locale: "fr_FR",
+    url: "https://vwa-kiltirel.vercel.app",
+    siteName: "Vwa Kiltirèl",
+    title: "Vwa Kiltirèl – Association culturelle à Tours",
+    description:
+      "Découvrez Vwa Kiltirèl : événements, ateliers et expériences culturelles afro-caribéennes à Tours.",
+    images: [
+      {
+        url: "/images/og-cover.png",
+        width: 1200,
+        height: 630,
+        alt: "Vwa Kiltirèl – Association culturelle à Tours",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Vwa Kiltirèl – Association culturelle à Tours",
+    description:
+      "Événements et expériences culturelles afro-caribéennes à Tours.",
+    images: ["/images/og-cover.png"],
+  },
+  alternates: {
+    canonical: "https://vwa-kiltirel.vercel.app",
+  },
+  category: "culture",
 };
 
 export default function RootLayout({
   children,
-}: {
+}: Readonly<{
   children: React.ReactNode;
-}) {
+}>) {
+  const organizationJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    name: "Vwa Kiltirèl",
+    url: "https://vwa-kiltirel.vercel.app",
+    logo: "https://vwa-kiltirel.vercel.app/favicon.png",
+    address: {
+      "@type": "PostalAddress",
+      streetAddress: "55 Rue Daniel Mayer",
+      addressLocality: "Tours",
+      postalCode: "37100",
+      addressCountry: "FR",
+    },
+    email: "vwakiltirel.asso@gmail.com",
+  };
+
   return (
     <html lang="fr">
       <body
         suppressHydrationWarning
-        className="bg-vwa-background text-vwa-dark antialiased relative overflow-x-hidden"
+        className="relative overflow-x-hidden bg-vwa-background text-vwa-dark antialiased"
       >
-        {/* --- FILIGRANE GLOBAL PREMIUM RESPONSIVE --- */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(organizationJsonLd),
+          }}
+        />
+
         <div
           className="
             pointer-events-none 
@@ -53,16 +130,14 @@ export default function RootLayout({
             "
           />
         </div>
-        {/* --- FIN FILIGRANE --- */}
 
-        <div className="min-h-screen flex flex-col">
+        <div className="flex min-h-screen flex-col">
           <Header />
 
-          <main className="flex-1 px-4 pb-20 pt-6 mx-auto w-full max-w-5xl">
+          <main className="mx-auto w-full max-w-5xl flex-1 px-4 pb-20 pt-6">
             {children}
           </main>
 
-          <MobileBottomNav />
           <Footer />
         </div>
       </body>

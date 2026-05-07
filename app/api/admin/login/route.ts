@@ -18,13 +18,6 @@ export async function POST(request: NextRequest) {
     const adminPasswordHash = process.env.ADMIN_PASSWORD_HASH;
     const cookieName = process.env.ADMIN_COOKIE_NAME || "vwa_admin_session";
 
-    console.log("LOGIN DEBUG", {
-      emailTyped: email,
-      adminEmail,
-      passwordTyped: password,
-      hashFromEnv: adminPasswordHash,
-    });
-
     if (!adminEmail || !adminPasswordHash) {
       return NextResponse.json(
         { error: "Configuration admin manquante." },
@@ -45,7 +38,7 @@ export async function POST(request: NextRequest) {
       null;
 
     const rateLimitKey = getClientKey(ip, email);
-    const rateLimit = checkAdminRateLimit(rateLimitKey);
+    const rateLimit = await checkAdminRateLimit(rateLimitKey);
 
     if (!rateLimit.allowed) {
       const retryMinutes = Math.ceil(rateLimit.retryAfterMs / 60000);
@@ -59,27 +52,20 @@ export async function POST(request: NextRequest) {
     }
 
     const isValidEmail = email === adminEmail;
-const isValidPassword = await bcrypt.compare(password, adminPasswordHash);
+    const isValidPassword = await bcrypt.compare(password, adminPasswordHash);
 
-console.log("LOGIN CHECK", {
-  emailTyped: email,
-  adminEmail,
-  isValidEmail,
-  passwordTyped: password,
-  hashFromEnv: adminPasswordHash,
-  isValidPassword,
-});
+    if (!isValidEmail || !isValidPassword) {
+      await recordAdminFailure(rateLimitKey);
 
-if (!isValidEmail || !isValidPassword) {
-  return NextResponse.json(
-    { error: "Identifiants invalides." },
-    { status: 401 }
-  );
-}
+      return NextResponse.json(
+        { error: "Identifiants invalides." },
+        { status: 401 }
+      );
+    }
 
-    clearAdminFailures(rateLimitKey);
+    await clearAdminFailures(rateLimitKey);
 
-    const sessionToken = signAdminSession(email);
+    const sessionToken = await signAdminSession(email);
 
     const response = NextResponse.json(
       { success: true, message: "Connexion réussie." },

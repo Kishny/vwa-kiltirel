@@ -8,19 +8,101 @@ export type Event = {
   date: string;
   time: string;
   location: string;
-  price: string;                // ce qui s’affiche dans la bande
+  price: string;
   shortDescription?: string;
   description: string;
   image: string;
-  isPast: boolean;
 
-  // nouvelles infos
-  paymentUrl?: string;          // lien HelloAsso ou autre
-  paymentNote?: string;         // texte sur le paiement
-  reservationNote?: string;     // "Réservation obligatoire", etc.
-  ticketNote?: string;          // "ticket à présenter à l'entrée", etc.
+  // Infos optionnelles
+  paymentUrl?: string;
+  paymentNote?: string;
+  reservationNote?: string;
+  ticketNote?: string;
+
+  // Champs premium
+  startDate?: string; // ISO recommandé
+  endDate?: string;   // ISO recommandé
+  maxPlaces?: number;
+  highlights?: string[];
+  audiencePoints?: string[];
 };
 
+
+
+// ==================== PARSE DATE FR ====================
+export function parseFrenchDateTime(
+  dateStr: string,
+  timeStr?: string
+): Date | null {
+  const months: Record<string, number> = {
+    janvier: 0,
+    février: 1,
+    mars: 2,
+    avril: 3,
+    mai: 4,
+    juin: 5,
+    juillet: 6,
+    août: 7,
+    septembre: 8,
+    octobre: 9,
+    novembre: 10,
+    décembre: 11,
+  };
+
+  const parts = dateStr.trim().toLowerCase().split(/\s+/);
+
+  if (parts.length < 4) return null;
+
+  const day = Number(parts[1]);
+  const month = months[parts[2] ?? ""];
+  const year = Number(parts[3]);
+
+  if (Number.isNaN(day) || Number.isNaN(year) || month === undefined) {
+    return null;
+  }
+
+  let hours = 12;
+  let minutes = 0;
+
+  if (timeStr) {
+    const startTime = timeStr.split("–")[0]?.trim();
+
+    const match = startTime?.match(/(\d{1,2})\s*h?\s*(\d{0,2})/i);
+
+    if (match) {
+      hours = Number(match[1]);
+      minutes = match[2] ? Number(match[2]) : 0;
+    }
+  }
+
+  return new Date(year, month, day, hours, minutes);
+}
+
+
+
+// ==================== GET DATE UNIQUE ====================
+export function getEventDate(event: Event): Date | null {
+  if (event.startDate) {
+    const parsed = new Date(event.startDate);
+    return Number.isNaN(parsed.getTime()) ? null : parsed;
+  }
+
+  return parseFrenchDateTime(event.date, event.time);
+}
+
+
+
+// ==================== STATUS ====================
+export function isEventPast(event: Event): boolean {
+  const date = getEventDate(event);
+  if (!date) return false;
+
+  return date.getTime() < Date.now();
+}
+
+
+
+// ==================== DATA ====================
 export const events: Event[] = [
   {
     slug: "brunch-mamans-reconnexion",
@@ -34,18 +116,21 @@ export const events: Event[] = [
     shortDescription:
       "Un moment de douceur entre mamans pour souffler, partager et se ressourcer.",
     description:
-      "Un brunch chaleureux entre mamans pour parler maternité, charge mentale, parentalité et temps pour soi. Au programme : échanges guidés, petite capsule bien-être et buffet partagé aux couleurs de la Caraïbe.",
+      "Un brunch chaleureux entre mamans pour parler maternité, charge mentale, parentalité et temps pour soi.",
     image: "/images/evenements/brunch-mamans.png",
-    isPast: false,
+
     paymentUrl:
       "https://www.helloasso.com/associations/vwa-kiltril/evenements/brunch-mamans-reconnexion",
-    paymentNote:
-      "Le règlement de la participation (10 à 15 €) se fait via un paiement sécurisé HelloAsso après validation du formulaire.",
-    reservationNote:
-      "Inscription obligatoire – places limitées pour garantir un cadre chaleureux.",
-    ticketNote:
-      "Un ticket numérique vous sera envoyé par email. Il sera à présenter à l’entrée du lieu de l’événement.",
+
+    startDate: "2026-03-29T11:00:00",
+    maxPlaces: 25,
+
+    highlights: [
+      "Un temps de respiration et de reconnexion entre mamans",
+      "Des échanges guidés autour du bien-être",
+    ],
   },
+
   {
     slug: "soiree-contes-musique",
     title: "Soirée contes & musique",
@@ -54,18 +139,16 @@ export const events: Event[] = [
     date: "Samedi 18 avril 2026",
     time: "19h – 22h",
     location: "Maison de quartier, Tours Nord",
-    price: "Entrée libre mais sous réservation – chapeau solidaire",
-    shortDescription:
-      "Une soirée où la parole, les rires et les percussions se répondent.",
+    price: "Entrée libre",
+    shortDescription: "Une soirée où la parole et la musique se rencontrent.",
     description:
-      "Une veillée moderne inspirée des soirées contes d’antan : histoires créoles, musiques live, percussions et moments d’échanges. Une soirée pensée pour toute la famille.",
+      "Une veillée moderne inspirée des soirées contes d’antan.",
     image: "/images/evenements/contes-musique.png",
-    isPast: false,
-    reservationNote:
-      "Entrée libre mais sur réservation – le nombre de places est limité.",
-    ticketNote:
-      "Votre email de confirmation fera office de ticket d’entrée à présenter à l’accueil.",
+
+    startDate: "2026-04-18T19:00:00",
+    maxPlaces: 80,
   },
+
   {
     slug: "pique-nique-culturel",
     title: "Pique-nique culturel",
@@ -74,33 +157,28 @@ export const events: Event[] = [
     date: "Samedi 10 mai 2025",
     time: "12h – 17h",
     location: "Parc de la Gloriette, Tours",
-    price: "Gratuit – sur inscription",
-    shortDescription:
-      "Un moment convivial en plein air pour célébrer les cultures afro-caribéennes.",
-    description:
-      "Pique-nique participatif avec musique, jeux pour enfants, découvertes culinaires et mini-ateliers autour de la culture créole et afro-descendante.",
+    price: "Gratuit",
+    shortDescription: "Un moment convivial en plein air.",
+    description: "Pique-nique participatif avec animations.",
     image: "/images/evenements/pique-nique-culturel.png",
-    isPast: true,
-  },
-  {
-  slug: "soiree-dansante-live",
-  title: "Soirée dansante — Live & Culture",
-  category: "Musique & danse",
-  tag: "Tout public",
-  date: "Samedi 22 février 2025",
-  time: "20h – 00h",
-  location: "Salle des Fêtes – Tours Nord",
-  price: "Entrée 5 € – Gratuit pour les moins de 12 ans",
-  shortDescription:
-    "Une soirée vibrante avec un artiste invité, des performances live et une ambiance chaleureuse.",
-  description:
-    "Une grande soirée dansante pour célébrer nos cultures afro-caribéennes. Au programme : DJ sets, performance live d’un artiste invité, initiation à des danses traditionnelles, espace food & chill. Une soirée festive pensée pour rassembler, danser et partager un moment authentique.",
-  image: "/images/evenements/soiree-dansante-live.png",
-  isPast: true,
-  reservationNote:
-    "Entrée sur réservation — les places étaient limitées à 120 personnes.",
-  ticketNote:
-    "Un ticket numérique a été envoyé par email et devait être présenté à l’accueil.",
-},
-];
 
+    startDate: "2025-05-10T12:00:00",
+  },
+
+  {
+    slug: "creation-bijoux-tissu-wax",
+    title: "Création de bijoux en tissu wax",
+    category: "Atelier",
+    tag: "Parents-enfants",
+    date: "Dimanche 29 mars 2026",
+    time: "15h – 17h",
+    location: "Maison de quartier, Tours",
+    price: "10€",
+    shortDescription: "Atelier créatif autour du wax.",
+    description: "Création et transmission autour du tissu wax.",
+    image: "/images/evenements/atelier-bijoux-wax.png",
+
+    startDate: "2026-03-29T15:00:00",
+    maxPlaces: 20,
+  },
+];

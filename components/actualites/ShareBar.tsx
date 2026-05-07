@@ -1,72 +1,70 @@
-// components/actualites/ShareBar.tsx
 "use client";
 
-import { useMemo, useState } from "react";
+import { useState } from "react";
+import { Share2, Link2, Check, Mail } from "lucide-react";
 
-type Props = {
-    title: string;
-};
+type Props = { title: string; description?: string };
 
-export default function ShareBar({ title }: Props) {
-    const [copied, setCopied] = useState(false);
+function FacebookIcon({ className }: { className?: string }) {
+  return (
+    <svg className={className} viewBox="0 0 24 24" fill="currentColor">
+      <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z" />
+    </svg>
+  );
+}
 
-    const url = useMemo(() => {
-        if (typeof window === "undefined") return "";
-        return window.location.href;
-    }, []);
+function XIcon({ className }: { className?: string }) {
+  return (
+    <svg className={className} viewBox="0 0 24 24" fill="currentColor">
+      <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+    </svg>
+  );
+}
 
-    const whatsappHref = useMemo(() => {
-        const text = encodeURIComponent(`${title}\n${url}`);
-        return `https://wa.me/?text=${text}`;
-    }, [title, url]);
+function LinkedinIcon({ className }: { className?: string }) {
+  return (
+    <svg className={className} viewBox="0 0 24 24" fill="currentColor">
+      <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6zM2 9h4v12H2z" />
+      <circle cx="4" cy="4" r="2" />
+    </svg>
+  );
+}
 
-    async function copyLink() {
-        try {
-            await navigator.clipboard.writeText(url);
-            setCopied(true);
-            window.setTimeout(() => setCopied(false), 1400);
-        } catch {
-            // fallback ultra simple
-            prompt("Copie le lien :", url);
-        }
-    }
+export default function ShareBar({ title, description = "" }: Props) {
+  const [copied, setCopied] = useState(false);
+  const url = typeof window !== "undefined" ? window.location.href : "";
 
-    function shareInstagram() {
-        // Instagram web n’accepte pas un “share url” direct fiable.
-        // On fait donc : copier + ouvrir Instagram.
-        copyLink();
-        window.open("https://www.instagram.com/", "_blank", "noopener,noreferrer");
-    }
+  const copyLink = async () => {
+    await navigator.clipboard.writeText(url);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
+  };
 
-    return (
-        <div className="flex flex-wrap items-center gap-2">
-            <a
-                href={whatsappHref}
-                target="_blank"
-                rel="noreferrer"
-                className="inline-flex items-center gap-2 rounded-full bg-vwa-dark text-vwa-background px-4 py-2 text-xs font-semibold shadow-[0_16px_45px_rgba(28,22,18,0.55)] hover:-translate-y-[1px] transition"
-                title="Partager sur WhatsApp"
-            >
-                WhatsApp <span aria-hidden>↗</span>
-            </a>
+  if (!url) return null;
 
-            <button
-                type="button"
-                onClick={shareInstagram}
-                className="inline-flex items-center gap-2 rounded-full bg-white/90 border border-vwa-background/80 px-4 py-2 text-xs font-semibold text-vwa-dark/80 shadow-[0_12px_36px_rgba(28,22,18,0.12)] hover:-translate-y-[1px] hover:border-vwa-accent/60 transition"
-                title="Copier le lien puis ouvrir Instagram"
-            >
-                Instagram <span aria-hidden>↗</span>
-            </button>
-
-            <button
-                type="button"
-                onClick={copyLink}
-                className="inline-flex items-center gap-2 rounded-full bg-white/90 border border-vwa-background/80 px-4 py-2 text-xs font-semibold text-vwa-dark/80 shadow-[0_12px_36px_rgba(28,22,18,0.12)] hover:-translate-y-[1px] hover:border-vwa-accent/60 transition"
-                title="Copier le lien"
-            >
-                {copied ? "Lien copié ✅" : "Copier le lien"}
-            </button>
-        </div>
-    );
+  return (
+    <div className="space-y-3">
+      <p className="text-xs font-semibold uppercase tracking-wide text-vwa-dark/50 flex items-center gap-2">
+        <Share2 className="h-3.5 w-3.5" /> Partager cet article
+      </p>
+      <div className="flex flex-wrap gap-2">
+        <button onClick={copyLink} className="inline-flex items-center gap-1.5 rounded-full bg-gray-100 px-3 py-1.5 text-xs font-medium text-gray-700 hover:bg-gray-200 transition">
+          {copied ? <Check className="h-3.5 w-3.5 text-green-600" /> : <Link2 className="h-3.5 w-3.5" />}
+          {copied ? "Copié !" : "Copier le lien"}
+        </button>
+        <a href={`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 rounded-full bg-[#1877F2] px-3 py-1.5 text-xs font-medium text-white hover:bg-[#0c63d4] transition">
+          <FacebookIcon className="h-3.5 w-3.5" /> Facebook
+        </a>
+        <a href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(title)}&url=${encodeURIComponent(url)}`} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 rounded-full bg-black px-3 py-1.5 text-xs font-medium text-white hover:bg-gray-800 transition">
+          <XIcon className="h-3.5 w-3.5" /> X
+        </a>
+        <a href={`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(url)}`} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 rounded-full bg-[#0A66C2] px-3 py-1.5 text-xs font-medium text-white hover:bg-[#004182] transition">
+          <LinkedinIcon className="h-3.5 w-3.5" /> LinkedIn
+        </a>
+        <a href={`mailto:?subject=${encodeURIComponent(`Partage : ${title}`)}&body=${encodeURIComponent(`${title}\n\n${description}\n\n${url}`)}`} className="inline-flex items-center gap-1.5 rounded-full bg-gray-200 px-3 py-1.5 text-xs font-medium text-gray-800 hover:bg-gray-300 transition">
+          <Mail className="h-3.5 w-3.5" /> Email
+        </a>
+      </div>
+    </div>
+  );
 }
