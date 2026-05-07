@@ -14,7 +14,7 @@ export async function sendNewsletterWelcomeEmail({
   const apiKey = process.env.BREVO_API_KEY;
   const fromEmail = process.env.ASSO_EMAIL;
   const assoName = process.env.ASSO_NAME || "Vwa Kiltirèl";
-  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://vwa-kiltirel.fr";
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://vwakiltirel-asso.org";
 
   if (!apiKey || !fromEmail) {
     return {

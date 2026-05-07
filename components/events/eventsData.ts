@@ -100,7 +100,7 @@ export function generateEventMetadata(event: AssociationEvent) {
     openGraph: {
       title: event.seo?.metaTitle || `${event.title} | Vwa Kiltirèl`,
       description: event.seo?.metaDescription || event.description.substring(0, 200),
-      url: `https://vwa-kiltirel.fr/evenements/${slug}`,
+      url: `https://vwakiltirel-asso.org/evenements/${slug}`,
       siteName: "Vwa Kiltirèl",
       locale: "fr_FR",
       type: "event",
@@ -155,7 +155,7 @@ export function generateEventJsonLd(event: AssociationEvent) {
       "@type": "Organization",
       name: event.organizer?.name || "Vwa Kiltirèl",
       email: event.organizer?.email || "vwakiltirel.asso@gmail.com",
-      url: "https://vwa-kiltirel.fr",
+      url: "https://vwakiltirel-asso.org",
     },
     offers: {
       "@type": "Offer",
@@ -163,7 +163,7 @@ export function generateEventJsonLd(event: AssociationEvent) {
       priceCurrency: "EUR",
       availability: "https://schema.org/LimitedAvailability",
       validFrom: new Date().toISOString(),
-      url: `https://vwa-kiltirel.fr/evenements/${slug}/inscription`,
+      url: `https://vwakiltirel-asso.org/evenements/${slug}/inscription`,
     },
     ...(event.capacity && { maximumAttendeeCapacity: event.capacity }),
     ...(event.targetAudience && { audience: event.targetAudience.join(", ") }),
@@ -282,7 +282,7 @@ export const associationEvents: AssociationEvent[] = [
     },
     organizer: {
       name: "Vwa Kiltirèl",
-      email: "contact@vwa-kiltirel.fr",
+      email: "contact@vwakiltirel-asso.org",
     },
     registrationDeadline: "2026-05-20",
     seo: {

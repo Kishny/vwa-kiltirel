@@ -41,7 +41,7 @@ export const metadata: Metadata = {
     title: "Médiathèque Vwa Kiltirèl | L'âme de notre communauté",
     description:
       "Plongez dans l'univers visuel de Vwa Kiltirèl : une collection authentique de nos moments les plus précieux, célébrant la richesse des cultures afro-descendantes à Tours.",
-    url: "https://vwa-kiltirel.fr/mediatheque",
+    url: "https://vwakiltirel-asso.org/mediatheque",
     siteName: "Vwa Kiltirèl",
     locale: "fr_FR",
     type: "website",
@@ -64,7 +64,7 @@ export const metadata: Metadata = {
     creator: "@vwa_kiltirel",
   },
   alternates: {
-    canonical: "https://vwa-kiltirel.fr/mediatheque",
+    canonical: "https://vwakiltirel-asso.org/mediatheque",
   },
   verification: {
     google: "votre-code-verification-google",
@@ -87,11 +87,11 @@ function generateMediaArchiveSchema(
     name: "Médiathèque Vwa Kiltirèl - Archives vivantes",
     description:
       "Une collection authentique de photographies et souvenirs, témoignant de la vitalité culturelle afro-descendante à Tours à travers les événements et moments de vie de l'association Vwa Kiltirèl.",
-    url: "https://vwa-kiltirel.fr/mediatheque",
+    url: "https://vwakiltirel-asso.org/mediatheque",
     mainEntity: {
       "@type": "Organization",
       name: "Vwa Kiltirèl",
-      url: "https://vwa-kiltirel.fr",
+      url: "https://vwakiltirel-asso.org",
       email: "vwakiltirel.asso@gmail.com",
       foundingDate: "2018",
       areaServed: "Tours",
@@ -139,13 +139,13 @@ function generateBreadcrumbSchema() {
         "@type": "ListItem",
         position: 1,
         name: "Accueil",
-        item: "https://vwa-kiltirel.fr",
+        item: "https://vwakiltirel-asso.org",
       },
       {
         "@type": "ListItem",
         position: 2,
         name: "Médiathèque - Nos souvenirs en images",
-        item: "https://vwa-kiltirel.fr/mediatheque",
+        item: "https://vwakiltirel-asso.org/mediatheque",
       },
     ],
   };
@@ -180,7 +180,7 @@ function generateImageGallerySchema(eventsWithMedia: EventWithMedia[]) {
     name: "Galerie d'âme - Vwa Kiltirèl",
     description:
       "Une collection unique de photographies célébrant la richesse culturelle afro-descendante à Tours à travers les événements et moments de vie de Vwa Kiltirèl.",
-    url: "https://vwa-kiltirel.fr/mediatheque",
+    url: "https://vwakiltirel-asso.org/mediatheque",
     numberOfItems: allImages.length,
     image: allImages.map((img) => ({
       "@type": "ImageObject",

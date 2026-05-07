@@ -37,7 +37,7 @@ export const metadata: Metadata = {
     title: "Politique RGPD & Données personnelles | Vwa Kiltirèl",
     description:
       "Découvrez la politique de protection des données personnelles de l'association Vwa Kiltirèl, conforme au RGPD. Vos droits, notre engagement.",
-    url: "https://vwa-kiltirel.fr/rgpd",
+    url: "https://vwakiltirel-asso.org/rgpd",
     siteName: "Vwa Kiltirèl",
     locale: "fr_FR",
     type: "website",
@@ -60,7 +60,7 @@ export const metadata: Metadata = {
     creator: "@vwa_kiltirel",
   },
   alternates: {
-    canonical: "https://vwa-kiltirel.fr/rgpd",
+    canonical: "https://vwakiltirel-asso.org/rgpd",
   },
   verification: {
     google: "votre-code-verification-google",
@@ -78,12 +78,12 @@ function generatePrivacyPolicySchema() {
     name: "Politique de confidentialité - Vwa Kiltirèl",
     description:
       "Politique de protection des données personnelles de l'association Vwa Kiltirèl, conforme au RGPD.",
-    url: "https://vwa-kiltirel.fr/rgpd",
+    url: "https://vwakiltirel-asso.org/rgpd",
     mainEntity: {
       "@type": "Organization",
       name: "Vwa Kiltirèl",
       legalName: "Association Vwa Kiltirèl",
-      url: "https://vwa-kiltirel.fr",
+      url: "https://vwakiltirel-asso.org",
       email: "vwakiltirel.asso@gmail.com",
       address: {
         "@type": "PostalAddress",
@@ -93,7 +93,7 @@ function generatePrivacyPolicySchema() {
         addressRegion: "Centre-Val de Loire",
         addressCountry: "FR",
       },
-      privacyPolicy: "https://vwa-kiltirel.fr/rgpd",
+      privacyPolicy: "https://vwakiltirel-asso.org/rgpd",
     },
   };
 }
@@ -107,13 +107,13 @@ function generateBreadcrumbSchema() {
         "@type": "ListItem",
         position: 1,
         name: "Accueil",
-        item: "https://vwa-kiltirel.fr",
+        item: "https://vwakiltirel-asso.org",
       },
       {
         "@type": "ListItem",
         position: 2,
         name: "RGPD",
-        item: "https://vwa-kiltirel.fr/rgpd",
+        item: "https://vwakiltirel-asso.org/rgpd",
       },
     ],
   };

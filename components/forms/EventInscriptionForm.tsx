@@ -269,7 +269,7 @@ export default function EventInscriptionForm({
       organizer: {
         "@type": "Organization",
         name: "Vwa Kiltirèl",
-        url: "https://vwa-kiltirel.fr",
+        url: "https://vwakiltirel-asso.org",
       },
     },
   };

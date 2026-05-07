@@ -7,6 +7,6 @@ export default function robots(): MetadataRoute.Robots {
       allow: "/",
       disallow: ["/admin/", "/api/"],
     },
-    sitemap: "https://vwa-kiltirel.vercel.app/sitemap.xml",
+    sitemap: "https://vwakiltirel-asso.org/sitemap.xml",
   };
 }

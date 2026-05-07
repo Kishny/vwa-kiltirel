@@ -36,7 +36,7 @@ export const metadata: Metadata = {
     title: "Mentions légales & Politique de confidentialité | Vwa Kiltirèl",
     description:
       "Consultez les mentions légales et la politique de protection des données personnelles de l'association Vwa Kiltirèl, conforme au RGPD.",
-    url: "https://vwa-kiltirel.fr/mentions-legales",
+    url: "https://vwakiltirel-asso.org/mentions-legales",
     siteName: "Vwa Kiltirèl",
     locale: "fr_FR",
     type: "website",
@@ -59,7 +59,7 @@ export const metadata: Metadata = {
     creator: "@vwa_kiltirel",
   },
   alternates: {
-    canonical: "https://vwa-kiltirel.fr/mentions-legales",
+    canonical: "https://vwakiltirel-asso.org/mentions-legales",
   },
   verification: {
     google: "votre-code-verification-google",
@@ -77,12 +77,12 @@ function generateLegalPageSchema() {
     name: "Mentions légales - Vwa Kiltirèl",
     description:
       "Mentions légales et politique de confidentialité de l'association Vwa Kiltirèl.",
-    url: "https://vwa-kiltirel.fr/mentions-legales",
+    url: "https://vwakiltirel-asso.org/mentions-legales",
     mainEntity: {
       "@type": "Organization",
       name: "Vwa Kiltirèl",
       legalName: "Association Vwa Kiltirèl",
-      url: "https://vwa-kiltirel.fr",
+      url: "https://vwakiltirel-asso.org",
       email: "vwakiltirel.asso@gmail.com",
       address: {
         "@type": "PostalAddress",
@@ -107,13 +107,13 @@ function generateBreadcrumbSchema() {
         "@type": "ListItem",
         position: 1,
         name: "Accueil",
-        item: "https://vwa-kiltirel.fr",
+        item: "https://vwakiltirel-asso.org",
       },
       {
         "@type": "ListItem",
         position: 2,
         name: "Mentions légales",
-        item: "https://vwa-kiltirel.fr/mentions-legales",
+        item: "https://vwakiltirel-asso.org/mentions-legales",
       },
     ],
   };

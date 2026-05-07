@@ -175,7 +175,7 @@ export default function NewsletterForm() {
     publisher: {
       "@type": "Organization",
       name: "Vwa Kiltirèl",
-      url: "https://vwa-kiltirel.fr",
+      url: "https://vwakiltirel-asso.org",
       email: "vwakiltirel.asso@gmail.com",
       address: {
         "@type": "PostalAddress",
@@ -201,7 +201,7 @@ export default function NewsletterForm() {
       "Formulaire d’inscription à la newsletter de Vwa Kiltirèl pour recevoir les prochains événements, ateliers et actualités culturelles.",
     target: {
       "@type": "EntryPoint",
-      urlTemplate: "https://vwa-kiltirel.fr/api/newsletter",
+      urlTemplate: "https://vwakiltirel-asso.org/api/newsletter",
       httpMethod: "POST",
       encodingType: "application/json",
       contentType: "application/json",
@@ -209,7 +209,7 @@ export default function NewsletterForm() {
     agent: {
       "@type": "Organization",
       name: "Vwa Kiltirèl",
-      url: "https://vwa-kiltirel.fr",
+      url: "https://vwakiltirel-asso.org",
     },
     expectsAcceptanceOf: {
       "@type": "Offer",

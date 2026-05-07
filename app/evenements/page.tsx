@@ -287,11 +287,11 @@ export default function EventsPage() {
     name: "Événements culturels Vwa Kiltirèl | Programmation à Tours",
     description:
       "Découvrez tous les événements de l'association Vwa Kiltirèl à Tours : ateliers, rencontres, soirées culturelles et moments de partage autour des cultures afro-descendantes, créoles et caribéennes.",
-    url: "https://vwa-kiltirel.fr/evenements",
+    url: "https://vwakiltirel-asso.org/evenements",
     mainEntity: {
       "@type": "Organization",
       name: "Vwa Kiltirèl",
-      url: "https://vwa-kiltirel.fr",
+      url: "https://vwakiltirel-asso.org",
       email: "vwakiltirel.asso@gmail.com",
       address: {
         "@type": "PostalAddress",
@@ -315,13 +315,13 @@ export default function EventsPage() {
         "@type": "ListItem",
         position: 1,
         name: "Accueil",
-        item: "https://vwa-kiltirel.fr",
+        item: "https://vwakiltirel-asso.org",
       },
       {
         "@type": "ListItem",
         position: 2,
         name: "Événements",
-        item: "https://vwa-kiltirel.fr/evenements",
+        item: "https://vwakiltirel-asso.org/evenements",
       },
     ],
   };
@@ -355,7 +355,7 @@ export default function EventsPage() {
             },
           },
           image: [event.image],
-          url: `https://vwa-kiltirel.fr/evenements/${event.slug}`,
+          url: `https://vwakiltirel-asso.org/evenements/${event.slug}`,
           ...(numericPrice !== undefined
             ? {
                 offers: {
@@ -365,7 +365,7 @@ export default function EventsPage() {
                   availability: "https://schema.org/InStock",
                   url:
                     event.paymentUrl ||
-                    `https://vwa-kiltirel.fr/evenements/${event.slug}`,
+                    `https://vwakiltirel-asso.org/evenements/${event.slug}`,
                 },
               }
             : {}),
@@ -401,7 +401,7 @@ export default function EventsPage() {
           },
         },
         image: [event.image],
-        url: `https://vwa-kiltirel.fr/evenements/${event.slug}`,
+        url: `https://vwakiltirel-asso.org/evenements/${event.slug}`,
       },
     })),
   };

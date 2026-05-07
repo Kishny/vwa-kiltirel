@@ -235,7 +235,7 @@ export default function EventFilters({
         item: {
           "@type": "Event",
           name: event.title,
-          url: `https://vwa-kiltirel.fr/evenements/${event.id}`,
+          url: `https://vwakiltirel-asso.org/evenements/${event.id}`,
         },
       })),
     },

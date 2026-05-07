@@ -31,7 +31,7 @@ export const metadata: Metadata = {
     title: "Actualités Vwa Kiltirèl | Culture afro-caribéenne à Tours",
     description:
       "Suivez l'actualité de Vwa Kiltirèl : articles, événements, coulisses et partages culturels.",
-    url: "https://vwa-kiltirel.fr/actualites",
+    url: "https://vwakiltirel-asso.org/actualites",
     siteName: "Vwa Kiltirèl",
     locale: "fr_FR",
     type: "website",
@@ -54,10 +54,7 @@ export const metadata: Metadata = {
     creator: "@vwa_kiltirel",
   },
   alternates: {
-    canonical: "https://vwa-kiltirel.fr/actualites",
-  },
-  verification: {
-    google: "votre-code-verification-google",
+    canonical: "https://vwakiltirel-asso.org/actualites",
   },
   category: "actualités association culturelle",
 };
@@ -69,18 +66,18 @@ const blogSchema = {
   name: "Actualités Vwa Kiltirèl",
   description:
     "Articles, coulisses et annonces de l'association Vwa Kiltirèl. Découvrez nos actualités culturelles afro-descendantes, créoles et caribéennes à Tours.",
-  url: "https://vwa-kiltirel.fr/actualites",
+  url: "https://vwakiltirel-asso.org/actualites",
   publisher: {
     "@type": "Organization",
     name: "Vwa Kiltirèl",
-    logo: "https://vwa-kiltirel.fr/logo.png",
+    logo: "https://vwakiltirel-asso.org/logo.png",
   },
   numberOfPosts: posts.length,
   blogPosts: posts.slice(0, 10).map((post) => ({
     "@type": "BlogPosting",
     name: post.title,
     headline: post.title,
-    url: `https://vwa-kiltirel.fr/actualites/${post.slug}`,
+    url: `https://vwakiltirel-asso.org/actualites/${post.slug}`,
     datePublished: post.date,
     image: post.cover,
   })),
@@ -90,8 +87,8 @@ const breadcrumbSchema = {
   "@context": "https://schema.org",
   "@type": "BreadcrumbList",
   itemListElement: [
-    { "@type": "ListItem", position: 1, name: "Accueil", item: "https://vwa-kiltirel.fr" },
-    { "@type": "ListItem", position: 2, name: "Actualités", item: "https://vwa-kiltirel.fr/actualites" },
+    { "@type": "ListItem", position: 1, name: "Accueil", item: "https://vwakiltirel-asso.org" },
+    { "@type": "ListItem", position: 2, name: "Actualités", item: "https://vwakiltirel-asso.org/actualites" },
   ],
 };
 

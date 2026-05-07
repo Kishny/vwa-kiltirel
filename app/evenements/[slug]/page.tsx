@@ -87,7 +87,7 @@ export async function generateMetadata({
     };
   }
 
-  const canonicalUrl = `https://vwa-kiltirel.fr/evenements/${slug}`;
+  const canonicalUrl = `https://vwakiltirel-asso.org/evenements/${slug}`;
   const description =
     event.shortDescription ||
     `Découvrez ${event.title} organisé par Vwa Kiltirèl à ${event.location}.`;
@@ -149,7 +149,7 @@ function generateEventSchema(
     organizer: {
       "@type": "Organization",
       name: "Vwa Kiltirèl",
-      url: "https://vwa-kiltirel.fr",
+      url: "https://vwakiltirel-asso.org",
     },
     ...(numericPrice !== null
       ? {
@@ -160,7 +160,7 @@ function generateEventSchema(
             availability: "https://schema.org/InStock",
             url:
               event.paymentUrl ||
-              `https://vwa-kiltirel.fr/evenements/${event.slug}`,
+              `https://vwakiltirel-asso.org/evenements/${event.slug}`,
           },
         }
       : {}),
@@ -176,19 +176,19 @@ function generateBreadcrumbSchema(slug: string, title: string) {
         "@type": "ListItem",
         position: 1,
         name: "Accueil",
-        item: "https://vwa-kiltirel.fr",
+        item: "https://vwakiltirel-asso.org",
       },
       {
         "@type": "ListItem",
         position: 2,
         name: "Événements",
-        item: "https://vwa-kiltirel.fr/evenements",
+        item: "https://vwakiltirel-asso.org/evenements",
       },
       {
         "@type": "ListItem",
         position: 3,
         name: title,
-        item: `https://vwa-kiltirel.fr/evenements/${slug}`,
+        item: `https://vwakiltirel-asso.org/evenements/${slug}`,
       },
     ],
   };

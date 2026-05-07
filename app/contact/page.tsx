@@ -36,7 +36,7 @@ export const metadata: Metadata = {
     title: "Contactez Vwa Kiltirèl | Association culturelle à Tours",
     description:
       "Une question, une idée, un partenariat ? Contactez l'équipe de Vwa Kiltirèl pour échanger sur vos projets culturels afro-caribéens à Tours.",
-    url: "https://vwa-kiltirel.fr/contact",
+    url: "https://vwakiltirel-asso.org/contact",
     siteName: "Vwa Kiltirèl",
     locale: "fr_FR",
     type: "website",
@@ -59,7 +59,7 @@ export const metadata: Metadata = {
     creator: "@vwa_kiltirel",
   },
   alternates: {
-    canonical: "https://vwa-kiltirel.fr/contact",
+    canonical: "https://vwakiltirel-asso.org/contact",
   },
   verification: {
     google: "votre-code-verification-google",
@@ -77,11 +77,11 @@ function generateContactPageSchema() {
     name: "Contactez Vwa Kiltirèl",
     description:
       "Page de contact de l'association Vwa Kiltirèl. Formulaire de contact et informations pour nous joindre.",
-    url: "https://vwa-kiltirel.fr/contact",
+    url: "https://vwakiltirel-asso.org/contact",
     mainEntity: {
       "@type": "Organization",
       name: "Vwa Kiltirèl",
-      url: "https://vwa-kiltirel.fr",
+      url: "https://vwakiltirel-asso.org",
       email: "vwakiltirel.asso@gmail.com",
       address: {
         "@type": "PostalAddress",
@@ -111,13 +111,13 @@ function generateBreadcrumbSchema() {
         "@type": "ListItem",
         position: 1,
         name: "Accueil",
-        item: "https://vwa-kiltirel.fr",
+        item: "https://vwakiltirel-asso.org",
       },
       {
         "@type": "ListItem",
         position: 2,
         name: "Contact",
-        item: "https://vwa-kiltirel.fr/contact",
+        item: "https://vwakiltirel-asso.org/contact",
       },
     ],
   };
@@ -130,7 +130,7 @@ function generateLocalBusinessSchema() {
     name: "Vwa Kiltirèl",
     description:
       "Association culturelle à Tours valorisant les cultures afro & afro-descendantes, créoles et caribéennes.",
-    url: "https://vwa-kiltirel.fr",
+    url: "https://vwakiltirel-asso.org",
     email: "vwakiltirel.asso@gmail.com",
     address: {
       "@type": "PostalAddress",

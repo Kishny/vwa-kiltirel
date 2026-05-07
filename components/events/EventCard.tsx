@@ -60,7 +60,7 @@ function generateEventSchema(event: Event) {
         organizer: {
             "@type": "Organization",
             name: "Vwa Kiltirèl",
-            url: "https://vwa-kiltirel.fr",
+            url: "https://vwakiltirel-asso.org",
         },
         offers: {
             "@type": "Offer",
@@ -68,7 +68,7 @@ function generateEventSchema(event: Event) {
             priceCurrency: "EUR",
             availability: availabilityMap[event.status],
             validFrom: new Date().toISOString(),
-            url: `https://vwa-kiltirel.fr/evenements/${event.slug}/inscription`,
+            url: `https://vwakiltirel-asso.org/evenements/${event.slug}/inscription`,
         },
     };
 }

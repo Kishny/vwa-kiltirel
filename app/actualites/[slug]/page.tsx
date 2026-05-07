@@ -45,17 +45,17 @@ export default async function ArticlePage({ params }: PageProps) {
     image: post.cover,
     datePublished: post.date,
     author: { "@type": "Organization", name: "Vwa Kiltirèl" },
-    publisher: { "@type": "Organization", name: "Vwa Kiltirèl", logo: "https://vwa-kiltirel.fr/logo.png" },
-    mainEntityOfPage: `https://vwa-kiltirel.fr/actualites/${post.slug}`,
+    publisher: { "@type": "Organization", name: "Vwa Kiltirèl", logo: "https://vwakiltirel-asso.org/logo.png" },
+    mainEntityOfPage: `https://vwakiltirel-asso.org/actualites/${post.slug}`,
   };
 
   const breadcrumbSchema = {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
     itemListElement: [
-      { "@type": "ListItem", position: 1, name: "Accueil", item: "https://vwa-kiltirel.fr" },
-      { "@type": "ListItem", position: 2, name: "Actualités", item: "https://vwa-kiltirel.fr/actualites" },
-      { "@type": "ListItem", position: 3, name: post.title, item: `https://vwa-kiltirel.fr/actualites/${post.slug}` },
+      { "@type": "ListItem", position: 1, name: "Accueil", item: "https://vwakiltirel-asso.org" },
+      { "@type": "ListItem", position: 2, name: "Actualités", item: "https://vwakiltirel-asso.org/actualites" },
+      { "@type": "ListItem", position: 3, name: post.title, item: `https://vwakiltirel-asso.org/actualites/${post.slug}` },
     ],
   };
 

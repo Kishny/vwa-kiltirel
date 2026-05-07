@@ -24,14 +24,14 @@ export const metadata: Metadata = {
   ],
 
   alternates: {
-    canonical: "https://vwa-kiltirel.vercel.app",
+    canonical: "https://vwakiltirel-asso.org",
   },
 
   openGraph: {
     title: "Vwa Kiltirèl – Association culturelle à Tours",
     description:
       "Découvrez Vwa Kiltirèl : événements, ateliers, transmission, partage et expériences culturelles afro-caribéennes à Tours.",
-    url: "https://vwa-kiltirel.vercel.app",
+    url: "https://vwakiltirel-asso.org",
     siteName: "Vwa Kiltirèl",
     images: [
       {
@@ -59,8 +59,8 @@ export default function Home() {
     "@context": "https://schema.org",
     "@type": "Organization",
     name: "Vwa Kiltirèl",
-    url: "https://vwa-kiltirel.vercel.app",
-    logo: "https://vwa-kiltirel.vercel.app/favicon.png",
+    url: "https://vwakiltirel-asso.org",
+    logo: "https://vwakiltirel-asso.org/favicon.png",
     description:
       "Association culturelle à Tours dédiée aux cultures afro-caribéennes, créoles et afro-descendantes à travers des événements, ateliers et actions culturelles.",
     address: {

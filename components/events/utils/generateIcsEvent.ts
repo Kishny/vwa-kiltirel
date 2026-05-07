@@ -32,7 +32,7 @@ export function generateIcsEvent(event: Event): string {
     "VERSION:2.0",
     "PRODID:-//Vwa Kiltirèl//NONSGML v1.0//FR",
     "BEGIN:VEVENT",
-    `UID:${event.slug}@vwa-kiltirel.fr`,
+    `UID:${event.slug}@vwakiltirel-asso.org`,
     `DTSTAMP:${formatICS(new Date())}`,
     `DTSTART:${formatICS(startDate)}`,
     `DTEND:${formatICS(endDate ?? startDate)}`,

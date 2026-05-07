@@ -38,7 +38,7 @@ export const metadata: Metadata = {
     title: "Vwa Kiltirèl | Association culturelle à Tours",
     description:
       "Découvrez l'association Vwa Kiltirèl, sa mission, ses valeurs et ses projets pour valoriser les cultures afro-descendantes, créoles et caribéennes à Tours.",
-    url: "https://vwa-kiltirel.fr/association",
+    url: "https://vwakiltirel-asso.org/association",
     siteName: "Vwa Kiltirèl",
     locale: "fr_FR",
     type: "website",
@@ -61,7 +61,7 @@ export const metadata: Metadata = {
     creator: "@vwa_kiltirel",
   },
   alternates: {
-    canonical: "https://vwa-kiltirel.fr/association",
+    canonical: "https://vwakiltirel-asso.org/association",
   },
   verification: {
     google: "votre-code-verification-google",
@@ -78,9 +78,9 @@ function generateOrganizationSchema() {
     "@type": "Organization",
     name: "Vwa Kiltirèl",
     alternateName: "Vwa Kiltirèl Association",
-    url: "https://vwa-kiltirel.fr",
-    logo: "https://vwa-kiltirel.fr/logo.png",
-    image: "https://vwa-kiltirel.fr/images/og/association-og.jpg",
+    url: "https://vwakiltirel-asso.org",
+    logo: "https://vwakiltirel-asso.org/logo.png",
+    image: "https://vwakiltirel-asso.org/images/og/association-og.jpg",
     description:
       "Association culturelle basée à Tours valorisant les cultures afro-descendantes, créoles et caribéennes à travers des événements, ateliers et moments de transmission.",
     foundingDate: "2025",
@@ -111,7 +111,7 @@ function generateOrganizationSchema() {
     contactPoint: {
       "@type": "ContactPoint",
       contactType: "contact",
-      email: "contact@vwa-kiltirel.fr",
+      email: "contact@vwakiltirel-asso.org",
       availableLanguage: ["French"],
     },
     sameAs: [
@@ -139,7 +139,7 @@ function generateWebPageSchema() {
     name: "À propos de Vwa Kiltirèl",
     description:
       "Découvrez l'association Vwa Kiltirèl, sa mission, ses valeurs, son équipe et sa vision culturelle à Tours.",
-    url: "https://vwa-kiltirel.fr/association",
+    url: "https://vwakiltirel-asso.org/association",
     mainEntity: {
       "@type": "Organization",
       name: "Vwa Kiltirèl",
@@ -158,13 +158,13 @@ function generateBreadcrumbSchema() {
         "@type": "ListItem",
         position: 1,
         name: "Accueil",
-        item: "https://vwa-kiltirel.fr",
+        item: "https://vwakiltirel-asso.org",
       },
       {
         "@type": "ListItem",
         position: 2,
         name: "Association",
-        item: "https://vwa-kiltirel.fr/association",
+        item: "https://vwakiltirel-asso.org/association",
       },
     ],
   };

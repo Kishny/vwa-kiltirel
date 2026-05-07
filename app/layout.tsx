@@ -5,7 +5,7 @@ import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://vwa-kiltirel.vercel.app"),
+  metadataBase: new URL("https://vwakiltirel-asso.org"),
   title: {
     default: "Vwa Kiltirèl – Association culturelle à Tours",
     template: "%s | Vwa Kiltirèl",
@@ -42,7 +42,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     locale: "fr_FR",
-    url: "https://vwa-kiltirel.vercel.app",
+    url: "https://vwakiltirel-asso.org",
     siteName: "Vwa Kiltirèl",
     title: "Vwa Kiltirèl – Association culturelle à Tours",
     description:
@@ -64,7 +64,7 @@ export const metadata: Metadata = {
     images: ["/images/og-cover.png"],
   },
   alternates: {
-    canonical: "https://vwa-kiltirel.vercel.app",
+    canonical: "https://vwakiltirel-asso.org",
   },
   category: "culture",
 };
@@ -78,8 +78,8 @@ export default function RootLayout({
     "@context": "https://schema.org",
     "@type": "Organization",
     name: "Vwa Kiltirèl",
-    url: "https://vwa-kiltirel.vercel.app",
-    logo: "https://vwa-kiltirel.vercel.app/favicon.png",
+    url: "https://vwakiltirel-asso.org",
+    logo: "https://vwakiltirel-asso.org/favicon.png",
     address: {
       "@type": "PostalAddress",
       streetAddress: "55 Rue Daniel Mayer",
