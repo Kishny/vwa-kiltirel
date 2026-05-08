@@ -1,8 +1,14 @@
 // app/layout.tsx
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import "./globals.css";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  viewportFit: "cover",
+};
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://vwakiltirel-asso.org"),
@@ -117,8 +123,8 @@ export default function RootLayout({
             src="/logo-filigrane.png"
             alt="Filigrane Vwa Kiltirèl"
             className="
-              w-[120vw]
-              sm:w-[90vw]
+              w-[100vw]
+              sm:w-[80vw]
               max-w-[900px]
               object-contain
               opacity-30 sm:opacity-25
