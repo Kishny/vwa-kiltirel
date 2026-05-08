@@ -42,32 +42,6 @@ export default async function EventInscriptionPage({ params }: PageProps) {
 
   return (
     <>
-      {/* Logo en filigrane qui tourne */}
-      <div className="pointer-events-none fixed inset-0 z-0 overflow-hidden">
-        <div className="absolute inset-0 flex items-center justify-center">
-          <div className="relative h-[800px] w-[800px] animate-[spin_60s_linear_infinite] opacity-[0.03] sm:opacity-[0.04]">
-            <Image
-              src="/images/Logo.png"
-              alt="Vwa Kiltirèl"
-              fill
-              sizes="800px"
-              className="object-contain"
-            />
-          </div>
-        </div>
-        <div className="absolute inset-0 flex items-center justify-center">
-          <div className="relative h-[500px] w-[500px] animate-[spin_90s_linear_infinite_reverse] opacity-[0.02] sm:opacity-[0.03]">
-            <Image
-              src="/images/Logo.png"
-              alt="Vwa Kiltirèl"
-              fill
-              sizes="500px"
-              className="object-contain"
-            />
-          </div>
-        </div>
-      </div>
-
       <main className="relative z-10 mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8 lg:py-12">
         {/* Navigation retour */}
         <div className="mb-8">

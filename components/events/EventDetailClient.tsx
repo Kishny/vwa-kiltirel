@@ -167,46 +167,6 @@ export default function EventDetailClient({
     <>
       <EventProgressBar progress={readProgress} />
 
-      {!shouldReduceMotion && (
-        <div
-          className="pointer-events-none fixed inset-0 z-0 overflow-hidden"
-          aria-hidden="true"
-        >
-          <div className="absolute inset-0 flex items-center justify-center">
-            <motion.div
-              animate={{ rotate: 360 }}
-              transition={{ duration: 60, repeat: Infinity, ease: "linear" }}
-              className="relative h-[800px] w-[800px] opacity-[0.03] sm:opacity-[0.04] md:opacity-[0.05]"
-            >
-              <Image
-                src="/images/Logo.png"
-                alt=""
-                fill
-                sizes="100vw"
-                className="object-contain"
-                priority
-              />
-            </motion.div>
-          </div>
-
-          <div className="absolute inset-0 flex items-center justify-center">
-            <motion.div
-              animate={{ rotate: -360 }}
-              transition={{ duration: 90, repeat: Infinity, ease: "linear" }}
-              className="relative h-[500px] w-[500px] opacity-[0.02] sm:opacity-[0.03]"
-            >
-              <Image
-                src="/images/Logo.png"
-                alt=""
-                fill
-                sizes="100vw"
-                className="object-contain"
-              />
-            </motion.div>
-          </div>
-        </div>
-      )}
-
       <main
         id="main-content"
         className="relative z-10 mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8 lg:py-12"

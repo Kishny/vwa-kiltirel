@@ -156,39 +156,6 @@ const SectionWrapper = ({
 export default function AssociationPageClient() {
   return (
     <>
-      {/* Logo en filigrane qui tourne */}
-      <div className="fixed inset-0 pointer-events-none z-0 overflow-hidden">
-        <div className="absolute inset-0 flex items-center justify-center">
-          <motion.div
-            animate={{ rotate: 360 }}
-            transition={{ duration: 60, repeat: Infinity, ease: "linear" }}
-            className="relative w-[800px] h-[800px] opacity-[0.03] sm:opacity-[0.04]"
-          >
-            <Image
-              src="/images/Logo.png"
-              alt="Vwa Kiltirèl"
-              fill
-              sizes="800px"
-              className="object-contain"
-            />
-          </motion.div>
-        </div>
-        <div className="absolute inset-0 flex items-center justify-center">
-          <motion.div
-            animate={{ rotate: -360 }}
-            transition={{ duration: 90, repeat: Infinity, ease: "linear" }}
-            className="relative w-[500px] h-[500px] opacity-[0.02] sm:opacity-[0.03]"
-          >
-            <Image
-              src="/images/Logo.png"
-              alt="Vwa Kiltirèl"
-              fill
-              sizes="500px"
-              className="object-contain"
-            />
-          </motion.div>
-        </div>
-      </div>
 
       <main className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-16">
         {/* ==================== HERO SECTION PREMIUM ==================== */}

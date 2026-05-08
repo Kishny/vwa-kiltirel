@@ -33,40 +33,6 @@ const SectionWrapper = ({
 export default function ContactPageClient() {
   return (
     <>
-      {/* Logo en filigrane qui tourne */}
-      <div className="fixed inset-0 z-0 overflow-hidden pointer-events-none">
-        <div className="absolute inset-0 flex items-center justify-center">
-          <motion.div
-            animate={{ rotate: 360 }}
-            transition={{ duration: 60, repeat: Infinity, ease: "linear" }}
-            className="relative h-[800px] w-[800px] opacity-[0.03] sm:opacity-[0.04] md:opacity-[0.05]"
-          >
-            <Image
-              src="/images/Logo.png"
-              alt="Vwa Kiltirèl"
-              fill
-              sizes="800px"
-              className="object-contain"
-            />
-          </motion.div>
-        </div>
-        <div className="absolute inset-0 flex items-center justify-center">
-          <motion.div
-            animate={{ rotate: -360 }}
-            transition={{ duration: 90, repeat: Infinity, ease: "linear" }}
-            className="relative h-[500px] w-[500px] opacity-[0.02] sm:opacity-[0.03]"
-          >
-            <Image
-              src="/images/Logo.png"
-              alt="Vwa Kiltirèl"
-              fill
-              sizes="500px"
-              className="object-contain"
-            />
-          </motion.div>
-        </div>
-      </div>
-
       <main className="relative z-10 mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8 lg:py-16">
         {/* ==================== HEADER ÉDITORIAL PREMIUM ==================== */}
         <SectionWrapper>

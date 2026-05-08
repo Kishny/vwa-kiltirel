@@ -94,20 +94,6 @@ export default function ArticlePageClient({ post }: Props) {
 
   return (
     <>
-      {/* Logo filigrane */}
-      <div className="fixed inset-0 pointer-events-none z-0 overflow-hidden">
-        <div className="absolute inset-0 flex items-center justify-center">
-          <motion.div animate={{ rotate: 360 }} transition={{ duration: 60, repeat: Infinity, ease: "linear" }} className="relative w-[800px] h-[800px] opacity-[0.03] sm:opacity-[0.04]">
-            <Image src="/images/Logo.png" alt="Vwa Kiltirèl" fill sizes="800px" className="object-contain" />
-          </motion.div>
-        </div>
-        <div className="absolute inset-0 flex items-center justify-center">
-          <motion.div animate={{ rotate: -360 }} transition={{ duration: 90, repeat: Infinity, ease: "linear" }} className="relative w-[500px] h-[500px] opacity-[0.02] sm:opacity-[0.03]">
-            <Image src="/images/Logo.png" alt="Vwa Kiltirèl" fill sizes="500px" className="object-contain" />
-          </motion.div>
-        </div>
-      </div>
-
       <main className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 py-12 lg:py-16">
         {/* Retour */}
         <div className="mb-6">
