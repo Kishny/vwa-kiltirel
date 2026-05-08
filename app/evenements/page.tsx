@@ -491,16 +491,21 @@ export default function EventsPage() {
           </div>
 
           <h1 className="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-bold text-vwa-dark mb-4">
-            Des rendez-vous culturels
+            Programmation prévisionnelle
             <span className="block text-vwa-primary/70 mt-2">
-              pensés pour rassembler, transmettre et faire vibrer
+              2027
             </span>
           </h1>
 
           <p className="max-w-2xl mx-auto text-sm sm:text-base text-vwa-dark/70 leading-relaxed">
-            Découvrez les événements à venir de Vwa Kiltirèl à Tours : ateliers,
-            rencontres, soirées culturelles, moments de bien-être et souvenirs
-            des temps forts déjà vécus.
+            Découvrez les événements et actions envisagés par Vwa Kiltirèl pour
+            l'année 2027. Les dates exactes, lieux et modalités d'inscription
+            seront confirmés prochainement.
+          </p>
+
+          <p className="mt-3 max-w-xl mx-auto text-xs text-vwa-dark/45 italic">
+            Les informations présentées sont susceptibles d'évoluer selon les
+            partenariats, les lieux disponibles et le calendrier associatif.
           </p>
 
           {/* Statistiques */}
@@ -659,7 +664,7 @@ export default function EventsPage() {
                               {/* TAGS */}
                               <div className="flex flex-wrap items-center gap-2">
                                 <span className="rounded-full bg-vwa-accent/10 px-3 py-1 text-[10px] font-bold uppercase tracking-[0.1em] text-vwa-accent">
-                                  À venir
+                                  {event.isPreview ? "Prévu" : "À venir"}
                                 </span>
 
                                 {event.category && (
@@ -724,10 +729,18 @@ export default function EventsPage() {
                                   <ArrowRight className="h-4 w-4" />
                                 </Link>
 
-                                <BlinkingButton href={ctaHref}>
-                                  {ctaLabel}
-                                </BlinkingButton>
+                                {!event.isPreview && (
+                                  <BlinkingButton href={ctaHref}>
+                                    {ctaLabel}
+                                  </BlinkingButton>
+                                )}
                               </div>
+
+                              {event.isPreview && (
+                                <p className="text-[10px] text-vwa-dark/40 italic pt-1">
+                                  Programmation prévisionnelle — dates et modalités à confirmer.
+                                </p>
+                              )}
                             </div>
                           </div>
 
@@ -762,12 +775,17 @@ export default function EventsPage() {
             transition={{ duration: 0.3 }}
           >
             {filteredPast.length === 0 ? (
-              <div className="text-center py-16">
-                <div className="inline-flex items-center justify-center w-20 h-20 rounded-full bg-vwa-dark/5 mb-4">
+              <div className="text-center py-16 space-y-4">
+                <div className="inline-flex items-center justify-center w-20 h-20 rounded-full bg-vwa-dark/5 mb-2">
                   <Camera className="h-10 w-10 text-vwa-dark/30" />
                 </div>
-                <p className="text-vwa-dark/60">
-                  Aucun souvenir dans cette catégorie
+                <p className="text-base font-semibold text-vwa-dark/70">
+                  Aucun événement archivé pour le moment
+                </p>
+                <p className="max-w-md mx-auto text-sm text-vwa-dark/50 leading-relaxed">
+                  Nos archives seront enrichies après les premiers événements de
+                  la programmation 2027. Vous y retrouverez les photos, vidéos
+                  et souvenirs des actions menées par Vwa Kiltirèl.
                 </p>
               </div>
             ) : (

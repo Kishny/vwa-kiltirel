@@ -1,9 +1,4 @@
 import type { Metadata } from "next";
-import { events, isEventPast } from "@/data/events";
-import { mediaByEvent, associationMedia, MediaItem } from "@/data/media";
-import MediathequeView, {
-  EventWithMedia,
-} from "@/components/mediatheque/MediathequeView";
 import MediathequeQuoteFooter from "@/components/mediatheque/MediathequeQuoteFooter";
 
 // ============================================
@@ -72,183 +67,11 @@ export const metadata: Metadata = {
   category: "médiathèque culturelle",
 };
 
-// ============================================
-// DONNÉES STRUCTURÉES JSON-LD PREMIUM
-// ============================================
-function generateMediaArchiveSchema(
-  eventsWithMedia: EventWithMedia[],
-  hasAssociationMedia: boolean
-) {
-  const allMediaItems: MediaItem[] = eventsWithMedia.flatMap((e) => e.medias);
-
-  return {
-    "@context": "https://schema.org",
-    "@type": "CollectionPage",
-    name: "Médiathèque Vwa Kiltirèl - Archives vivantes",
-    description:
-      "Une collection authentique de photographies et souvenirs, témoignant de la vitalité culturelle afro-descendante à Tours à travers les événements et moments de vie de l'association Vwa Kiltirèl.",
-    url: "https://vwakiltirel-asso.org/mediatheque",
-    mainEntity: {
-      "@type": "Organization",
-      name: "Vwa Kiltirèl",
-      url: "https://vwakiltirel-asso.org",
-      email: "vwakiltirel.asso@gmail.com",
-      foundingDate: "2018",
-      areaServed: "Tours",
-      knowsAbout: [
-        "Culture afro-descendante",
-        "Patrimoine créole",
-        "Art caribéen",
-        "Mémoire collective",
-      ],
-    },
-    numberOfItems:
-      allMediaItems.length + (hasAssociationMedia ? associationMedia.length : 0),
-    about: [
-      {
-        "@type": "Event",
-        name: "Événements culturels Vwa Kiltirèl",
-        description:
-          "Collection immersive de photographies capturant l'essence de nos ateliers, rencontres et célébrations, témoignant de la richesse des échanges culturels.",
-        location: {
-          "@type": "Place",
-          name: "Tours, France",
-          address: {
-            "@type": "PostalAddress",
-            addressLocality: "Tours",
-            addressCountry: "FR",
-          },
-        },
-      },
-      {
-        "@type": "CreativeWork",
-        name: "Vie associative et coulisses",
-        description:
-          "Instantanés authentiques de la vie de notre association : préparations, moments de partage et souvenirs précieux qui forgent notre identité collective.",
-      },
-    ],
-  };
-}
-
-function generateBreadcrumbSchema() {
-  return {
-    "@context": "https://schema.org",
-    "@type": "BreadcrumbList",
-    itemListElement: [
-      {
-        "@type": "ListItem",
-        position: 1,
-        name: "Accueil",
-        item: "https://vwakiltirel-asso.org",
-      },
-      {
-        "@type": "ListItem",
-        position: 2,
-        name: "Médiathèque - Nos souvenirs en images",
-        item: "https://vwakiltirel-asso.org/mediatheque",
-      },
-    ],
-  };
-}
-
-function generateImageGallerySchema(eventsWithMedia: EventWithMedia[]) {
-  const allImages: {
-    url: string;
-    name: string;
-    description: string;
-    dateCreated?: string;
-  }[] = [];
-
-  eventsWithMedia.forEach((event) => {
-    event.medias.forEach((media) => {
-      if (media.type === "image") {
-        allImages.push({
-          url: media.src,
-          name: `${event.title} - ${media.alt || "Moment précieux"}`,
-          description: `Capture authentique de ${event.title} - ${event.date} - ${event.location}`,
-          dateCreated: event.date,
-        });
-      }
-    });
-  });
-
-  if (allImages.length === 0) return null;
-
-  return {
-    "@context": "https://schema.org",
-    "@type": "ImageGallery",
-    name: "Galerie d'âme - Vwa Kiltirèl",
-    description:
-      "Une collection unique de photographies célébrant la richesse culturelle afro-descendante à Tours à travers les événements et moments de vie de Vwa Kiltirèl.",
-    url: "https://vwakiltirel-asso.org/mediatheque",
-    numberOfItems: allImages.length,
-    image: allImages.map((img) => ({
-      "@type": "ImageObject",
-      contentUrl: img.url,
-      name: img.name,
-      description: img.description,
-      dateCreated: img.dateCreated,
-    })),
-  };
-}
-
-type MediathequePageProps = {
-  searchParams: Promise<{
-    event?: string;
-    category?: string;
-  }>;
-};
-
-export default async function MediathequePage({
-  searchParams,
-}: MediathequePageProps) {
-  const { event: eventSlugFromUrl, category: categoryFromUrl } =
-    await searchParams;
-
-  const pastEventsWithMedia: EventWithMedia[] = events
-    .filter((e) => isEventPast(e) && mediaByEvent[e.slug]?.length)
-    .map((e) => ({
-      slug: e.slug,
-      title: e.title,
-      category: e.category,
-      date: e.date,
-      location: e.location,
-      medias: mediaByEvent[e.slug] as MediaItem[],
-    }))
-    .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
-
-  const hasAssociationMedia = associationMedia && associationMedia.length > 0;
-  const mediaArchiveSchema = generateMediaArchiveSchema(
-    pastEventsWithMedia,
-    hasAssociationMedia
-  );
-  const breadcrumbSchema = generateBreadcrumbSchema();
-  const imageGallerySchema = generateImageGallerySchema(pastEventsWithMedia);
-
-  const totalMediaCount =
-    pastEventsWithMedia.reduce((acc, e) => acc + e.medias.length, 0) +
-    (hasAssociationMedia ? associationMedia.length : 0);
-
+export default async function MediathequePage() {
   return (
     <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(mediaArchiveSchema) }}
-      />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
-      />
-      {imageGallerySchema && (
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify(imageGallerySchema),
-          }}
-        />
-      )}
 
-      <main className="relative mx-auto max-w-7xl px-6 py-16 lg:py-24">
+      <main className="relative mx-auto max-w-5xl px-6 py-16 lg:py-24">
         <div className="pointer-events-none fixed inset-0 -z-10">
           <div className="absolute inset-0 bg-gradient-to-br from-vwa-background via-vwa-background/95 to-vwa-background/90" />
           <div className="absolute left-0 right-0 top-0 h-[600px] bg-gradient-to-b from-vwa-accent/8 via-transparent to-transparent" />
@@ -256,52 +79,81 @@ export default async function MediathequePage({
           <div className="absolute -right-48 bottom-1/4 h-96 w-96 rounded-full bg-vwa-accent/5 blur-3xl" />
         </div>
 
-        <header className="mx-auto mb-16 max-w-4xl text-center">
-          <div className="mb-6 inline-flex items-center gap-3">
+        {/* Header */}
+        <header className="mx-auto mb-14 max-w-3xl text-center">
+          <div className="mb-5 inline-flex items-center gap-3">
             <div className="h-px w-8 bg-gradient-to-r from-transparent to-vwa-accent/50" />
-            <span className="text-[13px] font-medium uppercase tracking-[0.3em] text-vwa-accent/80">
+            <span className="text-[12px] font-medium uppercase tracking-[0.28em] text-vwa-accent/80">
               Mémoire vivante
             </span>
             <div className="h-px w-8 bg-gradient-to-l from-transparent to-vwa-accent/50" />
           </div>
 
-          <h1 className="mb-6 text-4xl font-bold tracking-tight text-vwa-dark lg:text-6xl">
-            L&apos;âme de Vwa Kiltirèl
-            <span className="mt-3 block text-2xl text-vwa-primary/70 lg:text-3xl">
-              en images
+          <h1 className="mb-5 text-4xl font-bold tracking-tight text-vwa-dark lg:text-5xl">
+            Médiathèque
+            <span className="mt-2 block text-2xl text-vwa-primary/70 lg:text-3xl">
+              bientôt disponible
             </span>
           </h1>
 
-          <p className="mx-auto max-w-2xl text-lg leading-relaxed text-vwa-dark/70">
-            Une collection précieuse de moments authentiques, capturés au fil de
-            nos rencontres, ateliers et célébrations. Chaque image raconte une
-            histoire, chaque regard témoigne d&apos;une émotion partagée.
+          <p className="mx-auto max-w-xl text-base leading-relaxed text-vwa-dark/65">
+            Les photos, vidéos, affiches et souvenirs des événements Vwa Kiltirèl
+            seront publiés ici après les premiers temps forts de la programmation 2027.
           </p>
-
-          <div className="mt-8 flex items-center justify-center gap-4">
-            <div className="flex items-center gap-2 rounded-full bg-vwa-dark/5 px-4 py-2 backdrop-blur-sm">
-              <span className="text-2xl">📸</span>
-              <span className="text-sm font-medium text-vwa-dark/80">
-                {totalMediaCount} souvenirs précieux
-              </span>
-            </div>
-            <div className="flex items-center gap-2 rounded-full bg-vwa-dark/5 px-4 py-2 backdrop-blur-sm">
-              <span className="text-2xl">✨</span>
-              <span className="text-sm font-medium text-vwa-dark/80">
-                {pastEventsWithMedia.length} événements célébrés
-              </span>
-            </div>
-          </div>
         </header>
 
-        <section className="mb-20">
-          <MediathequeView
-            events={pastEventsWithMedia}
-            associationMedia={associationMedia}
-            initialEventSlug={eventSlugFromUrl}
-            initialCategory={categoryFromUrl}
-          />
+        {/* Cartes "à venir" */}
+        <section className="mb-16 grid gap-5 sm:grid-cols-3">
+          {[
+            {
+              icon: "🖼️",
+              title: "Affiches à venir",
+              description:
+                "Découvrez prochainement les visuels officiels de nos événements 2027.",
+            },
+            {
+              icon: "📸",
+              title: "Photos d'événements",
+              description:
+                "Les galeries seront ajoutées après chaque rencontre, atelier ou soirée.",
+            },
+            {
+              icon: "🎥",
+              title: "Vidéos & souvenirs",
+              description:
+                "Cette section accueillera les moments partagés avec les participants, bénévoles et partenaires.",
+            },
+          ].map((card) => (
+            <div
+              key={card.title}
+              className="rounded-2xl border border-vwa-dark/8 bg-white/80 p-6 text-center shadow-sm"
+            >
+              <div className="mb-4 flex h-14 w-14 mx-auto items-center justify-center rounded-2xl bg-vwa-background text-3xl shadow-sm">
+                {card.icon}
+              </div>
+              <h2 className="mb-2 text-sm font-bold text-vwa-dark">
+                {card.title}
+              </h2>
+              <p className="text-xs leading-relaxed text-vwa-dark/55">
+                {card.description}
+              </p>
+            </div>
+          ))}
         </section>
+
+        {/* Mention + CTA newsletter */}
+        <div className="mx-auto max-w-lg rounded-2xl border border-vwa-accent/20 bg-vwa-accent/5 px-6 py-6 text-center">
+          <p className="text-sm font-medium text-vwa-dark/80">
+            Inscrivez-vous à la newsletter pour recevoir les annonces officielles
+            de Vwa Kiltirèl.
+          </p>
+          <a
+            href="/#newsletter-title"
+            className="mt-4 inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-vwa-primary to-vwa-dark px-5 py-2.5 text-sm font-semibold text-white shadow-md transition-all duration-300 hover:-translate-y-0.5 hover:shadow-xl"
+          >
+            S'inscrire à la newsletter
+          </a>
+        </div>
 
         <MediathequeQuoteFooter />
       </main>
