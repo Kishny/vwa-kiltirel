@@ -160,6 +160,7 @@ export default function NewsletterForm() {
 
   const emailInputClass = [
     inputBaseClass,
+    "pl-9",
     emailError
       ? "border-red-400/60 bg-red-50/60 focus:border-red-500 focus:shadow-[0_0_0_1px_rgba(239,68,68,0.25)]"
       : "",

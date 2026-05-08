@@ -1,6 +1,7 @@
 import { generateUnsubscribeToken } from "@/lib/newsletter-token";
 
 const BREVO_API_URL = "https://api.brevo.com/v3/smtp/email";
+const BREVO_CONTACTS_URL = "https://api.brevo.com/v3/contacts";
 
 type SendNewsletterWelcomeEmailParams = {
   toEmail: string;
@@ -91,4 +92,47 @@ export async function sendNewsletterWelcomeEmail({
   return {
     success: true,
   };
+}
+
+type AddContactToBrevoListParams = {
+  email: string;
+  firstName?: string;
+};
+
+export async function addContactToBrevoList({
+  email,
+  firstName,
+}: AddContactToBrevoListParams): Promise<void> {
+  const apiKey = process.env.BREVO_API_KEY;
+  const listIdRaw = process.env.BREVO_NEWSLETTER_LIST_ID;
+
+  if (!apiKey || !listIdRaw) return;
+
+  const listId = parseInt(listIdRaw, 10);
+  if (isNaN(listId)) return;
+
+  const payload: Record<string, unknown> = {
+    email,
+    listIds: [listId],
+    updateEnabled: true,
+  };
+
+  if (firstName?.trim()) {
+    payload.attributes = { FIRSTNAME: firstName.trim() };
+  }
+
+  const response = await fetch(BREVO_CONTACTS_URL, {
+    method: "POST",
+    headers: {
+      accept: "application/json",
+      "api-key": apiKey,
+      "content-type": "application/json",
+    },
+    body: JSON.stringify(payload),
+  });
+
+  if (!response.ok) {
+    const errorText = await response.text();
+    throw new Error(`Brevo contacts error: ${errorText}`);
+  }
 }

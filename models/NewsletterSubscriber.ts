@@ -48,10 +48,6 @@ const NewsletterSubscriberSchema = new Schema(
   }
 );
 
-/**
- * 🔐 Protection double index (important avec Mongo)
- */
-NewsletterSubscriberSchema.index({ email: 1 }, { unique: true });
 
 /**
  * Types TS automatiques

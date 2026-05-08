@@ -3,7 +3,7 @@ import HeroSection from "@/components/Home/HeroSection";
 import NextEventsCarousel from "@/components/Home/NextEventsCarousel";
 import MomentsFortsCarousel from "@/components/Home/MomentsFortsCarousel";
 import ValeursSection from "@/components/Home/ValeursSection";
-import NewsletterForm from "@/components/Home/NewsletterForm";
+import NewsletterForm from "@/components/forms/NewsletterForm";
 
 export const metadata: Metadata = {
   title: "Association culturelle à Tours – Événements afro-caribéens",
@@ -91,19 +91,8 @@ export default function Home() {
 
         <MomentsFortsCarousel />
 
-        <section className="mb-8 mt-2 text-center">
-          <h2 className="mb-2 text-lg font-semibold text-vwa-dark">
-            Restez informé·e
-          </h2>
-
-          <p className="mb-3 max-w-md mx-auto text-xs text-vwa-dark/70">
-            Recevez nos prochains événements, ateliers et appels à participation
-            directement dans votre boîte mail.
-          </p>
-
-          <div className="flex justify-center">
-            <NewsletterForm />
-          </div>
+        <section className="mb-8 mt-2 px-4">
+          <NewsletterForm />
         </section>
       </div>
     </>
