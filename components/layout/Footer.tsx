@@ -48,8 +48,8 @@ export default function Footer() {
           icon: EnvelopeIcon,
         },
         {
-          label: "06 00 00 00 00",
-          href: "tel:0600000000",
+          label: "07 43 55 00 51",
+          href: "tel:0743550051",
           icon: PhoneIcon,
         },
       ],
@@ -78,7 +78,7 @@ export default function Footer() {
           <div className="min-w-0 space-y-4">
             <div className="relative h-20 w-20">
               <Image
-                src="/logo-filigrane.png"
+                src="/logo-filigrane.webp"
                 alt="Vwa Kiltirèl Logo"
                 fill
                 sizes="80px"
@@ -182,7 +182,9 @@ export default function Footer() {
               </p>
               <div className="flex gap-4">
                 <a
-                  href="#"
+                  href="https://www.instagram.com/vwakiltirel.asso/?hl=fr"
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="group relative inline-block"
                   aria-label="Instagram"
                 >
@@ -196,7 +198,9 @@ export default function Footer() {
                   />
                 </a>
                 <a
-                  href="#"
+                  href="https://www.facebook.com/profile.php?id=61589580235561"
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="group relative inline-block"
                   aria-label="Facebook"
                 >
@@ -219,7 +223,7 @@ export default function Footer() {
           <div className="flex min-w-0 items-center gap-4 border-b border-vwa-background/20 pb-4">
             <div className="relative h-16 w-16 flex-shrink-0">
               <Image
-                src="/logo-filigrane.png"
+                src="/logo-filigrane.webp"
                 alt="Vwa Kiltirèl Logo"
                 fill
                 sizes="64px"
@@ -305,7 +309,9 @@ export default function Footer() {
             </p>
             <div className="flex flex-shrink-0 gap-4">
               <a
-                href="#"
+                href="https://www.instagram.com/vwakiltirel.asso/?hl=fr"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="group relative inline-block"
                 aria-label="Instagram"
               >
@@ -318,7 +324,9 @@ export default function Footer() {
                 />
               </a>
               <a
-                href="#"
+                href="https://www.facebook.com/profile.php?id=61589580235561"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="group relative inline-block"
                 aria-label="Facebook"
               >

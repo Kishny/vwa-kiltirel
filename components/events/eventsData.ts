@@ -184,7 +184,7 @@ export const associationEvents: AssociationEvent[] = [
     description:
       "Un atelier créatif pour fabriquer ensemble des bijoux colorés en tissu wax et découvrir leurs histoires.",
     tag: "Atelier créatif",
-    image: "/images/events/atelier-bijoux-wax.png",
+    image: "/images/events/atelier-bijoux-wax.webp",
     price: "15€ par binôme parent-enfant",
     isFree: false,
     capacity: 15,
@@ -212,7 +212,7 @@ export const associationEvents: AssociationEvent[] = [
     description:
       "Une soirée chaleureuse de contes, de chants et de guitare pour voyager à travers les cultures afro-caribéennes.",
     tag: "Soirée culturelle",
-    image: "/images/events/soiree-contes-musique.png",
+    image: "/images/events/soiree-contes-musique.webp",
     price: "Participation libre (chapeau)",
     isFree: true,
     capacity: 80,
@@ -241,7 +241,7 @@ export const associationEvents: AssociationEvent[] = [
     description:
       "Un moment de partage en plein air avec repas partagé, jeux pour les enfants et découvertes culinaires.",
     tag: "Plein air",
-    image: "/images/events/pique-nique-culturel.png",
+    image: "/images/events/pique-nique-culturel.webp",
     price: "Gratuit (repas partagé)",
     isFree: true,
     capacity: 50,
@@ -269,7 +269,7 @@ export const associationEvents: AssociationEvent[] = [
     description:
       "Un espace doux pour échanger entre mamans, partager des expériences et créer du lien autour d’un brunch gourmand.",
     tag: "Cercle de parole",
-    image: "/images/events/brunch-mamans.png",
+    image: "/images/events/brunch-mamans.webp",
     price: "12€ (boisson chaude + brunch)",
     isFree: false,
     capacity: 20,

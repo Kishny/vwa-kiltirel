@@ -201,7 +201,7 @@ export default function MediathequeView({
           {/* Logo */}
           <div className="relative h-[900px] w-[900px] sm:h-[1100px] sm:w-[1100px] lg:h-[1400px] lg:w-[1400px] opacity-[0.09]">
             <Image
-              src="/logo-filigrane.png"
+              src="/logo-filigrane.webp"
               alt="Logo Vwa Kiltirèl filigrane"
               fill
               priority
@@ -267,7 +267,7 @@ export default function MediathequeView({
                 {/* Logo */}
                 <div className="relative h-36 w-36 sm:h-44 sm:w-44 lg:h-56 lg:w-56 xl:h-64 xl:w-64 opacity-[0.18]">
                   <Image
-                    src="/images/logo.png"
+                    src="/images/Logo.webp"
                     alt="Logo Vwa Kiltirèl"
                     fill
                     sizes="(max-width: 640px) 144px, (max-width: 1024px) 176px, (max-width: 1280px) 224px, 256px"

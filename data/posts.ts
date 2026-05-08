@@ -40,7 +40,7 @@ export const posts: Post[] = [
     title: "Vwa Kiltirèl : pourquoi on existe (et pourquoi ça va vibrer à Tours)",
     excerpt:
       "Notre mission, notre vibe, et ce qu’on construit avec vous : transmission, partage et expériences afro-caribéennes premium.",
-    cover: "/images/actualites/cover-1.png",
+    cover: "/images/actualites/cover-1.webp",
     focal: "50% 25%",
     date: "2025-12-11",
     tags: ["Association", "Vision", "Tours"],
@@ -53,7 +53,7 @@ export const posts: Post[] = [
       },
       {
         type: "image",
-        src: "/images/actualites/cover-1.png",
+        src: "/images/actualites/cover-1.webp",
         alt: "Instant tendre et chaleureux, esprit Vwa Kiltirèl",
         caption: "Une culture se transmet… surtout quand elle se vit.",
         ratio: "16/9",
@@ -87,7 +87,7 @@ export const posts: Post[] = [
     title: "Coulisses : comment on prépare un événement (sans perdre la tête)",
     excerpt:
       "De l’idée à la scénographie : checklists, équipe, repérages… et le petit grain de magie Vwa Kiltirèl.",
-    cover: "/images/actualites/cover-2.png",
+    cover: "/images/actualites/cover-2.webp",
     focal: "50% 30%",
     date: "2025-12-08",
     tags: ["Coulisses", "Organisation", "Événements"],
@@ -99,7 +99,7 @@ export const posts: Post[] = [
       },
       {
         type: "image",
-        src: "/images/actualites/cover-2.png",
+        src: "/images/actualites/cover-2.webp",
         alt: "Sourire, énergie, coulisses et préparation",
         caption: "Les coulisses : là où l’énergie se construit.",
         ratio: "4/3",
@@ -127,7 +127,7 @@ export const posts: Post[] = [
     title: "Oralité, contes, musique : pourquoi on y tient autant",
     excerpt:
       "La parole comme héritage vivant. Ce qu’on veut transmettre et faire ressentir pendant nos soirées.",
-    cover: "/images/actualites/cover-3.png",
+    cover: "/images/actualites/cover-3.webp",
     focal: "40% 35%",
     date: "2025-11-30",
     tags: ["Culture", "Oralité", "Musique"],
@@ -139,7 +139,7 @@ export const posts: Post[] = [
       },
       {
         type: "image",
-        src: "/images/actualites/cover-3.png",
+        src: "/images/actualites/cover-3.webp",
         alt: "Musiciens et chaleur d’une scène, esprit culture & oralité",
         caption: "La parole, la musique, et ce frisson qu’on partage.",
         ratio: "16/9",

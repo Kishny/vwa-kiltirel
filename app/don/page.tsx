@@ -164,7 +164,7 @@ export default function DonPage() {
           <p className="mx-auto max-w-3xl text-base leading-relaxed text-vwa-dark/70 sm:text-lg">
             Votre don aide Vwa Kiltirèl à faire vivre des événements,
             ateliers, rencontres et projets culturels autour des cultures
-            afro-descendantes, créoles et caribéennes à Tours et ailleurs.
+            afro et afro-descendantes, créoles et caribéennes à Tours et ailleurs.
           </p>
         </div>
 

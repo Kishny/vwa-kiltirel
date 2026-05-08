@@ -19,35 +19,35 @@ const bureau = [
     role: "Présidente",
     name: "Maud ARON",
     desc: "Pilote la dynamique globale de l’association avec une vision humaine, culturelle et fédératrice.",
-    image: "/images/bureau/maud-aron.png",
+    image: "/images/bureau/maud-aron.webp",
     level: "main",
   },
   {
     role: "Co-président",
     name: "Jean VOLCY",
     desc: "Contribue à la stratégie, au développement des projets et à l’identité numérique de Vwa Kiltirèl.",
-    image: "/images/bureau/jean-volcy.png",
+    image: "/images/bureau/jean-volcy.webp",
     level: "main",
   },
   {
     role: "Trésorier",
     name: "Joseph ABENA",
     desc: "Veille à la bonne gestion financière et à la solidité des actions portées par l’association.",
-    image: "/images/bureau/joseph-abena.png",
+    image: "/images/bureau/joseph-abena.webp",
     level: "main",
   },
   {
     role: "Trésorier adjoint",
     name: "Thiery GASPARD",
     desc: "Assiste le trésorier dans la gestion financière, le suivi des comptes et la structuration budgétaire de l’association.",
-    image: "/images/bureau/thiery-gaspard.png",
+    image: "/images/bureau/thiery-gaspard.webp",
     level: "secondary",
   },
   {
     role: "Secrétaire générale",
     name: "Stessy ARON VOLCY",
     desc: "Assure l’organisation administrative, le suivi et la fluidité des échanges internes.",
-    image: "/images/bureau/stessy-aron.png",
+    image: "/images/bureau/stessy-aron.webp",
     level: "main",
   },
 ] as const;
@@ -233,7 +233,7 @@ export default function AssociationPageClient() {
 
               <div className="relative h-[300px] lg:h-auto rounded-2xl overflow-hidden">
                 <Image
-                  src="/images/actualites/cover-1.png"
+                  src="/images/actualites/cover-1.webp"
                   alt="Vwa Kiltirèl - Association culturelle à Tours"
                   fill
                   sizes="(max-width: 1024px) 100vw, 50vw"

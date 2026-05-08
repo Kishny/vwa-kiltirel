@@ -108,7 +108,7 @@ export default function MobileMenu({
               <div className="flex min-w-0 items-center gap-3">
                 <div className="relative h-12 w-12 flex-shrink-0 overflow-hidden rounded-2xl bg-white/70 ring-1 ring-white/50">
                   <Image
-                    src="/logo-filigrane.png"
+                    src="/logo-filigrane.webp"
                     alt="Logo Vwa Kiltirèl"
                     fill
                     sizes="48px"

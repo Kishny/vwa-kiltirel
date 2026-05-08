@@ -120,7 +120,7 @@ export default function RootLayout({
           "
         >
           <img
-            src="/logo-filigrane.png"
+            src="/logo-filigrane.webp"
             alt="Filigrane Vwa Kiltirèl"
             className="
               w-[100vw]
