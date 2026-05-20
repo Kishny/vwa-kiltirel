@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useCallback, useMemo } from "react";
+import { useState, useCallback, useEffect } from "react";
 import { usePathname } from "next/navigation";
 import { motion, useReducedMotion } from "framer-motion";
 import Image from "next/image";
@@ -50,10 +50,10 @@ export default function EventDetailClient({
   const [toastMessage, setToastMessage] = useState("");
   const [lightboxOpen, setLightboxOpen] = useState(false);
   const [lightboxIndex, setLightboxIndex] = useState(0);
+  const [pageUrl, setPageUrl] = useState("");
 
-  const pageUrl = useMemo(() => {
-    if (typeof window === "undefined") return "";
-    return `${window.location.origin}${pathname}`;
+  useEffect(() => {
+    setPageUrl(`${window.location.origin}${pathname}`);
   }, [pathname]);
 
   const eventIndex = allEvents.findIndex((e) => e.slug === event.slug);

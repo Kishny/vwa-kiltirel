@@ -7,6 +7,10 @@ type PageProps = {
   params: Promise<{ slug: string }>;
 };
 
+export function generateStaticParams() {
+  return events.map((event) => ({ slug: event.slug }));
+}
+
 function getEventBySlug(slug: string) {
   return events.find((event) => event.slug === slug);
 }

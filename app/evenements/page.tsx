@@ -702,15 +702,14 @@ export default function EventsPage() {
                           </div>
 
                           {/* IMAGE */}
-                          <div className="relative min-h-[280px] lg:min-h-full overflow-hidden bg-vwa-dark/5">
+                          <div className="relative min-h-[300px] lg:min-h-full overflow-hidden bg-vwa-dark/8 flex items-center justify-center">
                             <Image
                               src={event.image}
                               alt={event.title}
                               fill
-                              className="object-cover transition-transform duration-700 group-hover:scale-105"
+                              className="object-contain transition-transform duration-700 group-hover:scale-105"
                               sizes="(min-width: 1024px) 40vw, 100vw"
                             />
-                            <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent lg:bg-gradient-to-l lg:from-transparent lg:via-transparent lg:to-black/10" />
                           </div>
                         </div>
                       </div>

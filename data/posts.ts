@@ -42,7 +42,7 @@ export const posts: Post[] = [
       "Notre mission, notre vibe, et ce qu’on construit avec vous : transmission, partage et expériences afro-caribéennes premium.",
     cover: "/images/actualites/cover-1.webp",
     focal: "50% 25%",
-    date: "2025-12-11",
+    date: "2026-05-12",
     tags: ["Association", "Vision", "Tours"],
     readingMinutes: 4,
     isFeatured: true,
@@ -89,7 +89,7 @@ export const posts: Post[] = [
       "De l’idée à la scénographie : checklists, équipe, repérages… et le petit grain de magie Vwa Kiltirèl.",
     cover: "/images/actualites/cover-2.webp",
     focal: "50% 30%",
-    date: "2025-12-08",
+    date: "2026-05-06",
     tags: ["Coulisses", "Organisation", "Événements"],
     readingMinutes: 5,
     content: [
@@ -129,7 +129,7 @@ export const posts: Post[] = [
       "La parole comme héritage vivant. Ce qu’on veut transmettre et faire ressentir pendant nos soirées.",
     cover: "/images/actualites/cover-3.webp",
     focal: "40% 35%",
-    date: "2025-11-30",
+    date: "2026-04-28",
     tags: ["Culture", "Oralité", "Musique"],
     readingMinutes: 6,
     content: [

@@ -124,7 +124,7 @@ export const events: Event[] = [
       "Préparation de la saison culturelle 2027 avec les membres du bureau : planification, organisation et lancement des projets de l'année.",
     description:
       "Temps de travail interne pour préparer la saison culturelle 2027 : planification des événements, coordination des bénévoles et lancement des dossiers administratifs.",
-    image: "/images/evenements/brunch-mamans.webp",
+    image: "/images/evenements/bureau.png",
     startDate: "2027-01-18T14:00:00",
     isPreview: true,
     highlights: [
@@ -148,7 +148,7 @@ export const events: Event[] = [
       "Un temps fort pour mettre en lumière les cultures afro-créoles à travers la musique, la rencontre et le partage.",
     description:
       "Soirée culturelle d'ouverture de saison autour des cultures afro-créoles : musique live, échanges, témoignages et moments de partage pour tous les publics.",
-    image: "/images/evenements/soiree-dansante-live.webp",
+    image: "/images/evenements/racines.png",
     startDate: "2027-02-14T19:00:00",
     isPreview: true,
     highlights: [
@@ -173,7 +173,7 @@ export const events: Event[] = [
       "Des ateliers culturels pour sensibiliser les 12–25 ans à la langue, aux rythmes, aux récits et à l'expression créole.",
     description:
       "Série d'ateliers à destination des jeunes : initiation à la langue créole, percussions et rythmes afro-caribéens, récits oraux et expression artistique. Un projet pensé pour transmettre et faire vivre les cultures guyanaises et créoles.",
-    image: "/images/evenements/atelier-contes.webp",
+    image: "/images/evenements/lang.png",
     startDate: "2027-03-22T10:00:00",
     isPreview: true,
     highlights: [
@@ -198,7 +198,7 @@ export const events: Event[] = [
       "Renforcer les compétences internes et créer du lien avec d'autres structures associatives de Tours.",
     description:
       "Temps fort destiné aux membres, bénévoles et partenaires de Vwa Kiltirèl : formation, échanges de pratiques avec d'autres associations et renforcement du réseau local.",
-    image: "/images/evenements/brunch-mamans.webp",
+    image: "/images/evenements/rencontres.png",
     startDate: "2027-05-17T14:00:00",
     isPreview: true,
     highlights: [
@@ -223,7 +223,7 @@ export const events: Event[] = [
       "Une journée autour de la cuisine, des traditions orales, des savoir-faire familiaux et de la transmission culturelle.",
     description:
       "Journée festive et culturelle autour de la gastronomie afro-créole et caribéenne : démonstrations culinaires, transmission de savoir-faire familiaux, traditions orales et moments de partage intergénérationnels.",
-    image: "/images/evenements/pique-nique-culturel.webp",
+    image: "/images/evenements/saveur.png",
     startDate: "2027-06-20T11:00:00",
     isPreview: true,
     highlights: [
@@ -248,7 +248,7 @@ export const events: Event[] = [
       "Un moment convivial, populaire et festif autour des musiques et danses afro-caribéennes.",
     description:
       "Première soirée dansante de l'été : musiques afro-caribéennes, créoles et guyanaises, ambiance festive et populaire, ouverture à tous les publics.",
-    image: "/images/evenements/soiree-dansante-live.webp",
+    image: "/images/evenements/kreyol.png",
     startDate: "2027-07-12T20:00:00",
     isPreview: true,
     highlights: [
@@ -273,7 +273,7 @@ export const events: Event[] = [
       "Soirée culturelle estivale pour promouvoir les musiques afro-caribéennes dans une ambiance chaleureuse.",
     description:
       "Deuxième édition de la Kréyol Night : une soirée estivale dédiée aux musiques afro-caribéennes, aux rythmes créoles et guyanais, dans une ambiance festive et inclusive.",
-    image: "/images/evenements/contes-musique.webp",
+    image: "/images/evenements/kreyol2.png",
     startDate: "2027-08-09T20:00:00",
     isPreview: true,
     highlights: [
@@ -298,7 +298,7 @@ export const events: Event[] = [
       "Recueillir, transmettre et valoriser la mémoire créole avec les seniors et les personnes à mobilité réduite.",
     description:
       "Projet mémoire à destination des seniors et personnes à mobilité réduite : ateliers de récit de vie, valorisation de la mémoire créole et guyanaise, et transmission intergénérationnelle.",
-    image: "/images/evenements/atelier-bijoux-wax.webp",
+    image: "/images/evenements/souvenirs.png",
     startDate: "2027-09-21T14:00:00",
     isPreview: true,
     highlights: [
@@ -323,7 +323,7 @@ export const events: Event[] = [
       "Valoriser le travail réalisé avec les seniors, bénévoles et participants à travers une exposition restitution.",
     description:
       "Exposition de restitution du projet Souvenirs d'Îles : photographies, témoignages, créations et traces du travail de mémoire réalisé avec les seniors. Un temps d'ouverture au public local.",
-    image: "/images/evenements/atelier-contes.webp",
+    image: "/images/evenements/memoire.png",
     startDate: "2027-10-18T10:00:00",
     isPreview: true,
     highlights: [
@@ -348,7 +348,7 @@ export const events: Event[] = [
       "Bilan de l'année 2027, préparation des demandes de subvention et organisation de la saison 2028.",
     description:
       "Temps de travail interne : bilan des actions 2027, retours des participants et partenaires, préparation des dossiers de subvention et planification de la saison 2028.",
-    image: "/images/evenements/brunch-mamans.webp",
+    image: "/images/evenements/bilan.png",
     startDate: "2027-11-15T14:00:00",
     isPreview: true,
     highlights: [
@@ -372,7 +372,7 @@ export const events: Event[] = [
       "Un événement de clôture pour rassembler toutes les générations autour d'un moment culturel, festif et inclusif.",
     description:
       "Grande soirée de clôture de l'année 2027 : spectacle, musique, partage de souvenirs de la saison, rencontres intergénérationnelles et célébration de la culture afro-créole et guyanaise.",
-    image: "/images/evenements/soiree-dansante-live.webp",
+    image: "/images/evenements/vibrations.png",
     startDate: "2027-12-05T18:00:00",
     isPreview: true,
     highlights: [

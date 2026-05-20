@@ -38,8 +38,8 @@ export function EventHero({
           src={event.image}
           alt={event.title}
           fill
-          sizes="100vw" // ✅ IMPORTANT
-          className="object-cover"
+          sizes="(max-width: 1280px) calc(100vw - 2rem), 1280px"
+          className="object-cover object-top"
           priority
         />
 

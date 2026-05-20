@@ -36,7 +36,7 @@ const tempsForts: TempsFort[] = [
     category: "Soirée culturelle",
     description:
       "Un temps fort pour mettre en lumière les cultures afro-créoles à travers la musique, la rencontre et le partage.",
-    image: "/images/moments/soiree-contes-musique.webp",
+    image: "/images/evenements/racines.png",
     imageAlt: "Ambiance musicale lors d'une soirée culturelle afro-créole.",
     href: "/evenements/racines-vibrations",
     icon: <Music className="h-3.5 w-3.5" />,
@@ -51,7 +51,7 @@ const tempsForts: TempsFort[] = [
     category: "Ateliers jeunesse",
     description:
       "Des ateliers culturels pour sensibiliser les 12–25 ans à la langue, aux rythmes, aux récits et à l'expression créole.",
-    image: "/images/moments/atelier-parents-enfants.webp",
+    image: "/images/evenements/lang.png",
     imageAlt: "Jeunes participant à un atelier de langue et de percussions créoles.",
     href: "/evenements/lang-tambour",
     icon: <Sparkles className="h-3.5 w-3.5" />,
@@ -66,7 +66,7 @@ const tempsForts: TempsFort[] = [
     category: "Journée gastronomique",
     description:
       "Une journée autour de la cuisine, des traditions orales, des savoir-faire familiaux et de la transmission culturelle.",
-    image: "/images/moments/pique-nique-culturel.webp",
+    image: "/images/evenements/saveur.png",
     imageAlt: "Familles réunies autour d'un moment de partage gastronomique et culturel.",
     href: "/evenements/saveurs-savoirs",
     icon: <Utensils className="h-3.5 w-3.5" />,
@@ -81,7 +81,7 @@ const tempsForts: TempsFort[] = [
     category: "Soirée intergénérationnelle",
     description:
       "Un événement de clôture pour rassembler toutes les générations autour d'un moment culturel, festif et inclusif.",
-    image: "/images/moments/soiree-contes-musique.webp",
+    image: "/images/evenements/vibrations.png",
     imageAlt: "Soirée intergénérationnelle festive et inclusive de Vwa Kiltirèl.",
     href: "/evenements/souvenirs-vibrations",
     icon: <Users className="h-3.5 w-3.5" />,
