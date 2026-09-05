@@ -1,37 +1,64 @@
 import type { MetadataRoute } from "next";
 import { events } from "@/data/events";
 import { posts } from "@/data/posts";
+import { SITE_URL } from "@/lib/seo";
 
-const BASE_URL = "https://vwakiltirel-asso.org";
-const SITE_LAST_UPDATED = new Date("2026-05-07");
+/**
+ * Date de génération du sitemap.
+ * Le site étant régénéré à chaque déploiement, cette valeur reflète
+ * réellement la dernière mise en ligne — contrairement à une date figée
+ * en dur, que Google finit par ignorer.
+ */
+const BUILD_DATE = new Date();
 
-const staticRoutes: MetadataRoute.Sitemap = [
-  { url: BASE_URL, priority: 1.0, changeFrequency: "weekly", lastModified: SITE_LAST_UPDATED },
-  { url: `${BASE_URL}/evenements`, priority: 0.9, changeFrequency: "weekly", lastModified: SITE_LAST_UPDATED },
-  { url: `${BASE_URL}/actualites`, priority: 0.8, changeFrequency: "weekly", lastModified: SITE_LAST_UPDATED },
-  { url: `${BASE_URL}/association`, priority: 0.7, changeFrequency: "monthly", lastModified: SITE_LAST_UPDATED },
-  { url: `${BASE_URL}/mediatheque`, priority: 0.7, changeFrequency: "monthly", lastModified: SITE_LAST_UPDATED },
-  { url: `${BASE_URL}/contact`, priority: 0.6, changeFrequency: "monthly", lastModified: SITE_LAST_UPDATED },
-  { url: `${BASE_URL}/devenir-membre`, priority: 0.6, changeFrequency: "monthly", lastModified: SITE_LAST_UPDATED },
-  { url: `${BASE_URL}/don`, priority: 0.5, changeFrequency: "monthly", lastModified: SITE_LAST_UPDATED },
-  { url: `${BASE_URL}/mentions-legales`, priority: 0.2, changeFrequency: "yearly", lastModified: SITE_LAST_UPDATED },
-  { url: `${BASE_URL}/rgpd`, priority: 0.2, changeFrequency: "yearly", lastModified: SITE_LAST_UPDATED },
+/** Convertit une date en objet Date valide, avec repli sur la date de build. */
+function safeDate(value?: string): Date {
+  if (!value) return BUILD_DATE;
+  const parsed = new Date(value);
+  return Number.isNaN(parsed.getTime()) ? BUILD_DATE : parsed;
+}
+
+type StaticRoute = {
+  path: string;
+  priority: number;
+  changeFrequency: MetadataRoute.Sitemap[number]["changeFrequency"];
+};
+
+const staticRoutes: StaticRoute[] = [
+  { path: "", priority: 1.0, changeFrequency: "weekly" },
+  { path: "/evenements", priority: 0.9, changeFrequency: "weekly" },
+  { path: "/actualites", priority: 0.8, changeFrequency: "weekly" },
+  { path: "/association", priority: 0.8, changeFrequency: "monthly" },
+  { path: "/mediatheque", priority: 0.7, changeFrequency: "monthly" },
+  { path: "/devenir-membre", priority: 0.7, changeFrequency: "monthly" },
+  { path: "/contact", priority: 0.6, changeFrequency: "monthly" },
+  { path: "/don", priority: 0.6, changeFrequency: "monthly" },
+  { path: "/aide", priority: 0.5, changeFrequency: "monthly" },
+  { path: "/mentions-legales", priority: 0.2, changeFrequency: "yearly" },
+  { path: "/rgpd", priority: 0.2, changeFrequency: "yearly" },
 ];
 
 export default function sitemap(): MetadataRoute.Sitemap {
+  const pages: MetadataRoute.Sitemap = staticRoutes.map((route) => ({
+    url: `${SITE_URL}${route.path}`,
+    priority: route.priority,
+    changeFrequency: route.changeFrequency,
+    lastModified: BUILD_DATE,
+  }));
+
   const eventRoutes: MetadataRoute.Sitemap = events.map((event) => ({
-    url: `${BASE_URL}/evenements/${event.slug}`,
+    url: `${SITE_URL}/evenements/${event.slug}`,
     priority: 0.8,
     changeFrequency: "weekly" as const,
-    lastModified: SITE_LAST_UPDATED,
+    lastModified: BUILD_DATE,
   }));
 
   const postRoutes: MetadataRoute.Sitemap = posts.map((post) => ({
-    url: `${BASE_URL}/actualites/${post.slug}`,
+    url: `${SITE_URL}/actualites/${post.slug}`,
     priority: 0.7,
     changeFrequency: "monthly" as const,
-    lastModified: post.date ? new Date(post.date) : SITE_LAST_UPDATED,
+    lastModified: safeDate(post.date),
   }));
 
-  return [...staticRoutes, ...eventRoutes, ...postRoutes];
+  return [...pages, ...eventRoutes, ...postRoutes];
 }

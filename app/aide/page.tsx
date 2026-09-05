@@ -1,16 +1,151 @@
 // app/aide/page.tsx
 import type { Metadata } from "next";
 import Link from "next/link";
+import { canonicalUrl } from "@/lib/seo";
 
 export const metadata: Metadata = {
     title: "Aide / FAQ | Vwa Kiltirèl",
     description:
         "Questions fréquentes sur l’association Vwa Kiltirèl : adhésion, événements, dons, données personnelles et contact.",
+    alternates: {
+        canonical: canonicalUrl("/aide"),
+    },
+};
+
+/**
+ * Version texte des questions/réponses affichées plus bas.
+ * Google exige un FAQPage dont le contenu correspond à ce que voit
+ * l'internaute ; les réponses JSX contenant des liens, on en fournit
+ * ici l'équivalent en texte brut.
+ */
+const faqItems: { question: string; answer: string }[] = [
+    {
+        question: "Comment devenir membre de Vwa Kiltirèl ?",
+        answer:
+            "Vous pouvez rejoindre l’association via la page Devenir membre. Vous y retrouverez les différentes formules d’adhésion (trimestrielle ou annuelle) ainsi qu’un formulaire à remplir avec vos coordonnées.",
+    },
+    {
+        question:
+            "Quelle est la différence entre adhésion trimestrielle et annuelle ?",
+        answer:
+            "La formule trimestrielle (30 €) permet de soutenir l’association et de profiter des avantages membres pendant 3 mois, renouvelables. La formule annuelle (120 €) accompagne Vwa Kiltirèl sur 12 mois, avec les mêmes avantages sur une durée plus longue et un coût plus avantageux à l’année.",
+    },
+    {
+        question: "L’adhésion se renouvelle-t-elle automatiquement ?",
+        answer:
+            "Pour l’instant, le renouvellement se fait manuellement. Vous serez informé·e des prochaines échéances afin de choisir si vous souhaitez poursuivre votre adhésion.",
+    },
+    {
+        question: "Quels sont les avantages d’un membre ?",
+        answer:
+            "Accès à certains événements à tarif réduit, priorités d’inscription, participation à la vie associative (projets, ateliers, bénévolat) et communication privilégiée sur la programmation.",
+    },
+    {
+        question: "Où retrouver tous les événements Vwa Kiltirèl ?",
+        answer:
+            "La page Événements centralise les prochains rendez-vous ainsi que les événements passés. Chaque fiche donne accès aux détails, à l’inscription et à la médiathèque associée.",
+    },
+    {
+        question: "Comment s’inscrire à un événement ?",
+        answer:
+            "Depuis la page Événements, cliquez sur « Je m’inscris » pour l’événement souhaité. Vous serez redirigé·e vers un formulaire dédié (inscription simple ou lien de paiement via HelloAsso selon le type d’événement).",
+    },
+    {
+        question: "Que se passe-t-il si je ne peux plus venir ?",
+        answer:
+            "En cas d’empêchement, merci de prévenir l’association au moins 48 heures avant afin de libérer la place. Les modalités précises (remboursement éventuel, report) sont indiquées sur chaque événement.",
+    },
+    {
+        question: "Les événements sont-ils accessibles à tout public ?",
+        answer:
+            "Certains événements sont tout public, d’autres sont pensés pour des publics précis (mamans, familles, enfants, adultes). Le public visé est mentionné sur chaque fiche événement.",
+    },
+    {
+        question: "Comment faire un don à l’association ?",
+        answer:
+            "Vous pouvez exprimer votre intention de don depuis la page Don / Soutenir, en choisissant un montant, une fréquence (ponctuel ou mensuel) et un mode de règlement. Le module de paiement en ligne sécurisé sera ajouté progressivement.",
+    },
+    {
+        question: "Mon don ouvre-t-il droit à une réduction d’impôt ?",
+        answer:
+            "Cela dépend du cadre fiscal dans lequel se situe l’association. Pour l’instant, les dons sont principalement considérés comme un soutien volontaire. Si des reçus fiscaux deviennent possibles, l’information sera clairement indiquée sur le site.",
+    },
+    {
+        question: "Puis-je faire un don sans être membre ?",
+        answer:
+            "Oui. Vous pouvez soutenir l’association via un don libre même sans adhérer. À l’inverse, vous pouvez adhérer sans effectuer de don complémentaire.",
+    },
+    {
+        question: "Où retrouver les photos des événements ?",
+        answer:
+            "Les photos et certains extraits vidéo sont accessibles dans la page Médiathèque, classés par événement et par thématique.",
+    },
+    {
+        question: "Que faites-vous de mon image lors des événements ?",
+        answer:
+            "Certains événements peuvent être photographiés ou filmés afin d’illustrer la vie de l’association. Nous le précisons dans les informations de l’événement et restons à l’écoute si vous ne souhaitez pas apparaître sur les supports de communication.",
+    },
+    {
+        question: "Puis-je demander à être retiré·e d’une photo ?",
+        answer:
+            "Oui. Écrivez à vwakiltirel.asso@gmail.com en indiquant l’événement, la photo concernée et si possible une capture d’écran. Nous traitons la demande dans les meilleurs délais.",
+    },
+    {
+        question: "Quelles données collectez-vous via le site ?",
+        answer:
+            "Nous collectons uniquement les informations nécessaires au traitement de vos demandes : inscriptions aux événements, adhésions, dons, contact. Ces données sont limitées à ce qui est utile pour vous répondre ou vous tenir informé·e.",
+    },
+    {
+        question:
+            "Comment puis-je exercer mes droits (accès, rectification, suppression) ?",
+        answer:
+            "Écrivez à vwakiltirel.asso@gmail.com en précisant l’objet de votre demande. Les grandes lignes sont détaillées sur la page Mentions légales / RGPD.",
+    },
+    {
+        question: "Combien de temps conservez-vous mes données ?",
+        answer:
+            "Les durées de conservation varient selon le type de données (gestion des membres, inscriptions, dons). Nous conservons les informations uniquement le temps nécessaire à la gestion de la relation avec vous et aux obligations légales.",
+    },
+    {
+        question: "Comment vous contacter directement ?",
+        answer:
+            "Vous pouvez passer par la page Contact ou écrire à vwakiltirel.asso@gmail.com. Nous faisons le maximum pour répondre sous 48 heures.",
+    },
+    {
+        question: "Puis-je proposer un projet ou une collaboration ?",
+        answer:
+            "Oui, c’est même très bienvenu. Expliquez votre idée via la page Contact en précisant le cadre, les publics concernés et, si possible, les dates envisagées.",
+    },
+    {
+        question: "Proposez-vous du bénévolat au sein de Vwa Kiltirèl ?",
+        answer:
+            "Oui, ponctuellement ou sur la durée (événements, logistique, communication). Vous pouvez le mentionner dans le message de contact ou lors de votre adhésion.",
+    },
+];
+
+const faqSchema = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "@id": `${canonicalUrl("/aide")}#faq`,
+    inLanguage: "fr-FR",
+    mainEntity: faqItems.map((item) => ({
+        "@type": "Question",
+        name: item.question,
+        acceptedAnswer: {
+            "@type": "Answer",
+            text: item.answer,
+        },
+    })),
 };
 
 export default function AidePage() {
     return (
         <main className="relative max-w-5xl mx-auto px-4 py-10 space-y-10">
+            <script
+                type="application/ld+json"
+                dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+            />
+
             {/* Halo / ambiance */}
             <div className="pointer-events-none absolute inset-0 -z-10">
                 <div className="absolute inset-0 bg-gradient-to-b from-vwa-background/0 via-vwa-background/65 to-vwa-background" />

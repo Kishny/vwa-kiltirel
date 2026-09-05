@@ -4,6 +4,7 @@ import NextEventsCarousel from "@/components/Home/NextEventsCarousel";
 import MomentsFortsCarousel from "@/components/Home/MomentsFortsCarousel";
 import ValeursSection from "@/components/Home/ValeursSection";
 import NewsletterForm from "@/components/forms/NewsletterForm";
+import { SITE_URL, OG_IMAGE } from "@/lib/seo";
 
 export const metadata: Metadata = {
   title: "Association culturelle à Tours – Événements afro-caribéens",
@@ -24,18 +25,18 @@ export const metadata: Metadata = {
   ],
 
   alternates: {
-    canonical: "https://vwakiltirel-asso.org",
+    canonical: SITE_URL,
   },
 
   openGraph: {
     title: "Vwa Kiltirèl – Association culturelle à Tours",
     description:
       "Découvrez Vwa Kiltirèl : événements, ateliers, transmission, partage et expériences culturelles afro-caribéennes à Tours.",
-    url: "https://vwakiltirel-asso.org",
+    url: SITE_URL,
     siteName: "Vwa Kiltirèl",
     images: [
       {
-        url: "/images/og-cover.png",
+        url: OG_IMAGE,
         width: 1200,
         height: 630,
         alt: "Vwa Kiltirèl – Association culturelle à Tours",
@@ -50,51 +51,25 @@ export const metadata: Metadata = {
     title: "Vwa Kiltirèl – Association culturelle à Tours",
     description:
       "Événements, ateliers et expériences culturelles afro-caribéennes à Tours.",
-    images: ["/images/og-cover.png"],
+    images: [OG_IMAGE],
   },
 };
 
 export default function Home() {
-  const jsonLd = {
-    "@context": "https://schema.org",
-    "@type": "Organization",
-    name: "Vwa Kiltirèl",
-    url: "https://vwakiltirel-asso.org",
-    logo: "https://vwakiltirel-asso.org/favicon.png",
-    description:
-      "Association culturelle à Tours dédiée aux cultures afro-caribéennes, créoles et afro-descendantes à travers des événements, ateliers et actions culturelles.",
-    address: {
-      "@type": "PostalAddress",
-      streetAddress: "55 Rue Daniel Mayer",
-      addressLocality: "Tours",
-      postalCode: "37100",
-      addressCountry: "FR",
-    },
-    areaServed: "Tours",
-    email: "vwakiltirel.asso@gmail.com",
-  };
-
   return (
-    <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify(jsonLd),
-        }}
-      />
+    // L'identité de l'association (NGO) et le schéma WebSite sont déclarés
+    // une seule fois dans app/layout.tsx : ne pas les redéclarer ici.
+    <div className="flex flex-col gap-10 py-6">
+      <HeroSection />
+      <NextEventsCarousel />
 
-      <div className="flex flex-col gap-10 py-6">
-        <HeroSection />
-        <NextEventsCarousel />
+      <ValeursSection />
 
-        <ValeursSection />
+      <MomentsFortsCarousel />
 
-        <MomentsFortsCarousel />
-
-        <section className="mb-8 mt-2 px-4">
-          <NewsletterForm />
-        </section>
-      </div>
-    </>
+      <section className="mb-8 mt-2 px-4">
+        <NewsletterForm />
+      </section>
+    </div>
   );
 }

@@ -1,12 +1,11 @@
 import Link from "next/link";
-import Header from "@/components/layout/Header";
-import Footer from "@/components/layout/Footer";
 
+// Le Header et le Footer sont déjà rendus par app/layout.tsx : les réimporter
+// ici produisait un en-tête et un pied de page dupliqués dans le HTML, ainsi
+// qu'un <main> imbriqué dans un <main>.
 export default function NotFound() {
   return (
-    <>
-      <Header />
-      <main className="relative flex min-h-[70vh] items-center justify-center px-4 py-20">
+    <section className="relative flex min-h-[70vh] items-center justify-center px-4 py-20">
         <div className="pointer-events-none absolute inset-0 -z-10">
           <div className="absolute inset-0 bg-gradient-to-b from-vwa-background/50 via-vwa-background to-vwa-background" />
           <div className="absolute left-1/2 top-20 h-80 w-80 -translate-x-1/2 rounded-full bg-vwa-accent/15 blur-3xl opacity-60" />
@@ -47,8 +46,6 @@ export default function NotFound() {
             </Link>
           </div>
         </div>
-      </main>
-      <Footer />
-    </>
+    </section>
   );
 }

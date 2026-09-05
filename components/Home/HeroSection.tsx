@@ -26,7 +26,13 @@ export default function HeroSection() {
         transition={{ delay: 0.2, duration: 0.5 }}
         className="text-3xl sm:text-4xl lg:text-5xl font-bold text-vwa-dark"
       >
-        🧡 Vwa Kiltirèl
+        {/* Le H1 est le signal le plus fort envoyé à Google sur le sujet de la
+            page : il doit contenir le nom ET l'activité + la ville. L'emoji
+            reste présent en décoration, hors du texte indexé. */}
+        <span aria-hidden="true">🧡</span> Vwa Kiltirèl
+        <span className="mt-2 block text-lg font-semibold text-vwa-dark/75 sm:text-xl lg:text-2xl">
+          Association culturelle afro-caribéenne à Tours
+        </span>
       </motion.h1>
 
       <motion.p

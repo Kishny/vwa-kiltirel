@@ -1,6 +1,7 @@
 // app/don/page.tsx
 
 import type { Metadata } from "next";
+import { canonicalUrl } from "@/lib/seo";
 import Link from "next/link";
 
 
@@ -12,6 +13,9 @@ export const metadata: Metadata = {
   title: "Faire un don | Vwa Kiltirèl",
   description:
     "Soutenez Vwa Kiltirèl par un don et contribuez au rayonnement des cultures afro & afro-descendantes, créoles et caribéennes à Tours.",
+  alternates: {
+    canonical: canonicalUrl("/don"),
+  },
 };
 
 

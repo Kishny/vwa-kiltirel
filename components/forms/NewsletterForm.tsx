@@ -167,74 +167,12 @@ export default function NewsletterForm() {
   ].join(" ");
 
   // Données structurées JSON-LD enrichies
-  const newsletterSchema = {
-    "@context": "https://schema.org",
-    "@type": "Newsletter",
-    name: "Newsletter Vwa Kiltirèl",
-    description:
-      "Inscription à la newsletter de Vwa Kiltirèl pour recevoir les prochains événements, ateliers et actualités culturelles afro-descendantes, créoles et caribéennes à Tours.",
-    publisher: {
-      "@type": "Organization",
-      name: "Vwa Kiltirèl",
-      url: "https://vwakiltirel-asso.org",
-      email: "vwakiltirel.asso@gmail.com",
-      address: {
-        "@type": "PostalAddress",
-        streetAddress: "55 Rue Daniel Mayer",
-        addressLocality: "Tours",
-        postalCode: "37100",
-        addressCountry: "FR",
-      },
-    },
-    audience: {
-      "@type": "Audience",
-      name: "Personnes intéressées par les cultures afro-descendantes, créoles et caribéennes",
-    },
-    availableLanguage: "French",
-    keywords: "newsletter, événements, ateliers, culture afro-caribéenne, Tours",
-  };
-
-  const subscribeActionSchema = {
-    "@context": "https://schema.org",
-    "@type": "SubscribeAction",
-    name: "Inscription à la newsletter Vwa Kiltirèl",
-    description:
-      "Formulaire d’inscription à la newsletter de Vwa Kiltirèl pour recevoir les prochains événements, ateliers et actualités culturelles.",
-    target: {
-      "@type": "EntryPoint",
-      urlTemplate: "https://vwakiltirel-asso.org/api/newsletter",
-      httpMethod: "POST",
-      encodingType: "application/json",
-      contentType: "application/json",
-    },
-    agent: {
-      "@type": "Organization",
-      name: "Vwa Kiltirèl",
-      url: "https://vwakiltirel-asso.org",
-    },
-    expectsAcceptanceOf: {
-      "@type": "Offer",
-      name: "Newsletter Vwa Kiltirèl",
-      availability: "https://schema.org/OnlineOnly",
-    },
-  };
-
+  // Note SEO : les anciens JSON-LD "Newsletter" et "SubscribeAction" ont été
+  // retirés. "Newsletter" n'existe pas dans le vocabulaire schema.org et
+  // "SubscribeAction" n'est pas valide en bloc racine : les deux généraient
+  // des erreurs dans le test des résultats enrichis de Google.
   return (
     <>
-      {/* JSON-LD Schema.org pour le SEO */}
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify(newsletterSchema),
-        }}
-      />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify(subscribeActionSchema),
-        }}
-      />
-
       <section
         aria-labelledby="newsletter-title"
         className="relative overflow-hidden rounded-[2rem] border border-vwa-background/80 bg-white/95 px-5 py-6 shadow-[0_22px_60px_rgba(28,22,18,0.10)] backdrop-blur-sm sm:px-6"

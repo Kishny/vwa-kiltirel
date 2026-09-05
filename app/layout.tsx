@@ -3,6 +3,7 @@ import type { Metadata, Viewport } from "next";
 import "./globals.css";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
+import { SITE_URL, organizationSchema, webSiteSchema } from "@/lib/seo";
 
 export const viewport: Viewport = {
   width: "device-width",
@@ -11,7 +12,7 @@ export const viewport: Viewport = {
 };
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://vwakiltirel-asso.org"),
+  metadataBase: new URL(SITE_URL),
   title: {
     default: "Vwa Kiltirèl – Association culturelle à Tours",
     template: "%s | Vwa Kiltirèl",
@@ -48,7 +49,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     locale: "fr_FR",
-    url: "https://vwakiltirel-asso.org",
+    url: SITE_URL,
     siteName: "Vwa Kiltirèl",
     title: "Vwa Kiltirèl – Association culturelle à Tours",
     description:
@@ -70,7 +71,7 @@ export const metadata: Metadata = {
     images: ["/images/og-cover.png"],
   },
   alternates: {
-    canonical: "https://vwakiltirel-asso.org",
+    canonical: SITE_URL,
   },
   category: "culture",
 };
@@ -80,32 +81,24 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const organizationJsonLd = {
-    "@context": "https://schema.org",
-    "@type": "Organization",
-    name: "Vwa Kiltirèl",
-    url: "https://vwakiltirel-asso.org",
-    logo: "https://vwakiltirel-asso.org/favicon.png",
-    address: {
-      "@type": "PostalAddress",
-      streetAddress: "55 Rue Daniel Mayer",
-      addressLocality: "Tours",
-      postalCode: "37100",
-      addressCountry: "FR",
-    },
-    email: "vwakiltirel.asso@gmail.com",
-  };
-
   return (
     <html lang="fr">
       <body
         suppressHydrationWarning
         className="relative overflow-x-hidden bg-vwa-background text-vwa-dark antialiased"
       >
+        {/* Identité de l'association (NGO) + site — schémas globaux,
+            volontairement déclarés une seule fois pour tout le site. */}
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
-            __html: JSON.stringify(organizationJsonLd),
+            __html: JSON.stringify(organizationSchema),
+          }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(webSiteSchema),
           }}
         />
 

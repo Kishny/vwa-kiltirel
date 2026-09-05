@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
@@ -28,6 +29,29 @@ export function generateStaticParams() {
 
 function getEventBySlug(slug: string) {
   return events.find((event) => event.slug === slug);
+}
+
+/**
+ * Les formulaires d'inscription sont des pages transactionnelles : elles
+ * dupliqueraient le contenu de la fiche événement dans l'index Google sans
+ * apporter de valeur en résultat de recherche. On les exclut de l'index tout
+ * en laissant Google suivre les liens qu'elles contiennent.
+ */
+export async function generateMetadata({
+  params,
+}: PageProps): Promise<Metadata> {
+  const { slug } = await params;
+  const event = getEventBySlug(slug);
+
+  return {
+    title: event
+      ? `Inscription — ${event.title} | Vwa Kiltirèl`
+      : "Inscription | Vwa Kiltirèl",
+    robots: {
+      index: false,
+      follow: true,
+    },
+  };
 }
 
 export default async function EventInscriptionPage({ params }: PageProps) {
