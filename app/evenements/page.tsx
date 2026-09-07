@@ -6,6 +6,12 @@ import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import { events } from "@/data/events";
 import {
+  ORG_ADDRESS,
+  absoluteUrl,
+  canonicalUrl,
+  organizationRef,
+} from "@/lib/seo";
+import {
   CalendarDays,
   MapPin,
   Ticket,
@@ -252,32 +258,40 @@ export default function EventsPage() {
   ];
 
   // ==================== HELPERS SEO / JSON-LD ====================
-  function toIsoStartDate(
-    dateStr: string,
-    timeStr?: string,
-  ): string | undefined {
-    const parsed = parseFrenchEventDate(dateStr, timeStr).start;
-    return parsed ? parsed.toISOString() : undefined;
+  // `event.date` est une formulation lisible ("Prévu en novembre 2027") que
+  // le parseur français n'interprète pas : il renvoyait null, le champ
+  // disparaissait du JSON-LD et Google signalait "startDate manquant".
+  // Le champ `startDate` des données est la seule source fiable.
+  function toIsoStartDate(event: { startDate?: string }): string | undefined {
+    return event.startDate || undefined;
   }
 
-  function extractNumericPrice(price?: string): number | undefined {
-    if (!price) return undefined;
+  type PriceInfo =
+    | { kind: "free" }
+    | { kind: "paid"; amount: number }
+    | { kind: "unknown" };
 
-    const normalized = price.toLowerCase();
+  /** Un événement gratuit mérite une offre à 0 € ; un tarif non communiqué,
+      aucune offre. Aligné sur la page de détail. */
+  function parsePrice(price?: string): PriceInfo {
+    if (!price) return { kind: "unknown" };
+
+    const normalized = price.replace(",", ".").trim().toLowerCase();
 
     if (
       normalized.includes("gratuit") ||
       normalized.includes("entrée libre") ||
-      normalized.includes("libre")
+      normalized.includes("prix libre") ||
+      normalized === "libre"
     ) {
-      return undefined;
+      return { kind: "free" };
     }
 
-    const match = normalized.match(/\d+(?:[.,]\d+)?/);
-    if (!match) return undefined;
+    const match = normalized.match(/\d+(?:\.\d+)?/);
+    if (!match) return { kind: "unknown" };
 
-    const numeric = Number(match[0].replace(",", "."));
-    return Number.isNaN(numeric) ? undefined : numeric;
+    const amount = Number(match[0]);
+    return Number.isNaN(amount) ? { kind: "unknown" } : { kind: "paid", amount };
   }
 
   // Données structurées JSON-LD pour le SEO
@@ -287,18 +301,8 @@ export default function EventsPage() {
     name: "Événements culturels Vwa Kiltirèl | Programmation à Tours",
     description:
       "Découvrez tous les événements de l'association Vwa Kiltirèl à Tours : ateliers, rencontres, soirées culturelles et moments de partage autour des cultures afro-descendantes, créoles et caribéennes.",
-    url: "https://vwakiltirel-asso.org/evenements",
-    mainEntity: {
-      "@type": "Organization",
-      name: "Vwa Kiltirèl",
-      url: "https://vwakiltirel-asso.org",
-      email: "vwakiltirel.asso@gmail.com",
-      address: {
-        "@type": "PostalAddress",
-        addressLocality: "Tours",
-        addressCountry: "FR",
-      },
-    },
+    url: canonicalUrl("/evenements"),
+    mainEntity: organizationRef,
     about: {
       "@type": "Thing",
       name: "Programmation culturelle Vwa Kiltirèl",
@@ -315,13 +319,13 @@ export default function EventsPage() {
         "@type": "ListItem",
         position: 1,
         name: "Accueil",
-        item: "https://vwakiltirel-asso.org",
+        item: canonicalUrl("/"),
       },
       {
         "@type": "ListItem",
         position: 2,
         name: "Événements",
-        item: "https://vwakiltirel-asso.org/evenements",
+        item: canonicalUrl("/evenements"),
       },
     ],
   };
@@ -333,39 +337,54 @@ export default function EventsPage() {
     description: "Liste des prochains événements culturels à venir à Tours",
     numberOfItems: filteredUpcoming.length,
     itemListElement: filteredUpcoming.map((event, index) => {
-      const numericPrice = extractNumericPrice(event.price);
+      const price = parsePrice(event.price);
+      const startDate = toIsoStartDate(event);
+      const eventUrl = canonicalUrl(`/evenements/${event.slug}`);
 
       return {
         "@type": "ListItem",
         position: index + 1,
         item: {
           "@type": "Event",
+          "@id": `${eventUrl}#event`,
           name: event.title,
           description: event.shortDescription || event.description,
-          startDate: toIsoStartDate(event.date, event.time),
+          ...(startDate ? { startDate } : {}),
+          ...(event.endDate ? { endDate: event.endDate } : {}),
           eventStatus: "https://schema.org/EventScheduled",
           eventAttendanceMode: "https://schema.org/OfflineEventAttendanceMode",
           location: {
             "@type": "Place",
             name: event.location,
-            address: {
-              "@type": "PostalAddress",
-              addressLocality: "Tours",
-              addressCountry: "FR",
-            },
+            address: ORG_ADDRESS,
           },
-          image: [event.image],
-          url: `https://vwakiltirel-asso.org/evenements/${event.slug}`,
-          ...(numericPrice !== undefined
+          organizer: organizationRef,
+          performer: organizationRef,
+          image: [absoluteUrl(event.image)],
+          url: eventUrl,
+          ...(price.kind === "free"
             ? {
+                isAccessibleForFree: true,
                 offers: {
                   "@type": "Offer",
-                  price: numericPrice,
+                  price: 0,
                   priceCurrency: "EUR",
                   availability: "https://schema.org/InStock",
-                  url:
-                    event.paymentUrl ||
-                    `https://vwakiltirel-asso.org/evenements/${event.slug}`,
+                  url: event.paymentUrl || eventUrl,
+                  ...(startDate ? { validFrom: startDate } : {}),
+                },
+              }
+            : {}),
+          ...(price.kind === "paid"
+            ? {
+                isAccessibleForFree: false,
+                offers: {
+                  "@type": "Offer",
+                  price: price.amount,
+                  priceCurrency: "EUR",
+                  availability: "https://schema.org/InStock",
+                  url: event.paymentUrl || eventUrl,
+                  ...(startDate ? { validFrom: startDate } : {}),
                 },
               }
             : {}),
@@ -381,29 +400,34 @@ export default function EventsPage() {
     description:
       "Archives des événements culturels déjà organisés par Vwa Kiltirèl",
     numberOfItems: filteredPast.length,
-    itemListElement: filteredPast.map((event, index) => ({
-      "@type": "ListItem",
-      position: index + 1,
-      item: {
-        "@type": "Event",
-        name: event.title,
-        description: event.shortDescription || event.description,
-        startDate: toIsoStartDate(event.date, event.time),
-        eventStatus: "https://schema.org/EventCompleted",
-        eventAttendanceMode: "https://schema.org/OfflineEventAttendanceMode",
-        location: {
-          "@type": "Place",
-          name: event.location,
-          address: {
-            "@type": "PostalAddress",
-            addressLocality: "Tours",
-            addressCountry: "FR",
+    itemListElement: filteredPast.map((event, index) => {
+      const startDate = toIsoStartDate(event);
+      const eventUrl = canonicalUrl(`/evenements/${event.slug}`);
+
+      return {
+        "@type": "ListItem",
+        position: index + 1,
+        item: {
+          "@type": "Event",
+          "@id": `${eventUrl}#event`,
+          name: event.title,
+          description: event.shortDescription || event.description,
+          ...(startDate ? { startDate } : {}),
+          ...(event.endDate ? { endDate: event.endDate } : {}),
+          eventStatus: "https://schema.org/EventCompleted",
+          eventAttendanceMode: "https://schema.org/OfflineEventAttendanceMode",
+          location: {
+            "@type": "Place",
+            name: event.location,
+            address: ORG_ADDRESS,
           },
+          organizer: organizationRef,
+          performer: organizationRef,
+          image: [absoluteUrl(event.image)],
+          url: eventUrl,
         },
-        image: [event.image],
-        url: `https://vwakiltirel-asso.org/evenements/${event.slug}`,
-      },
-    })),
+      };
+    }),
   };
 
   return (
